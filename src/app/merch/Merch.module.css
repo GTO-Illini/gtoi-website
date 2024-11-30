@@ -1,0 +1,7 @@
+.merchImage {
+  object-fit: contain;
+  height: 300px;
+  width: auto;
+  flex-shrink: 0;
+  border: 2px solid black;
+}
