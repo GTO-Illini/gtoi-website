@@ -1,7 +1,7 @@
 export default function Tools() {
   return (
     <main className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">Resources</h1>
+      <h1 className="text-3xl font-bold mb-6">Tools</h1>
       <p>Poker Solver: Stay Tuned!</p>
       <p className="mt-6">Poker Lecture Videos:</p>
       <div className="mt-6">
