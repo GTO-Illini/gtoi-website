@@ -1,0 +1,26 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.calendarCell {
+  display: flex;
+  width: 7.5rem;
+  height: 6rem;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: right;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #EBEBEB;
+  color: #000;
+  font-family: "JQKAs Wild";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
