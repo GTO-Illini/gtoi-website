@@ -35,7 +35,7 @@ function getStartDateOffset(date: Date) {
 // }
 
 export default function Events() {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [displayDate, setDisplayDate] = useState(new Date());
   const [monthData, setMonthData] = useState<{ [key: number]: any }>({});
 
@@ -60,7 +60,7 @@ export default function Events() {
         for (const event of events) {
           const dateObj = new Date(event['start']['dateTime']);
           const dayOfMonth = dateObj.getDate();
-          tempData[dayOfMonth] = tempData[dayOfMonth] ? [...tempData[dayOfMonth], { id: event['id'], summary: event['summary'] }] : [{ id: event['id'], summary: event['summary'] }];
+          tempData[dayOfMonth] = tempData[dayOfMonth] ? [...tempData[dayOfMonth], event] : [event];
         }
         return tempData;
       });
@@ -70,18 +70,17 @@ export default function Events() {
   }
 
   useEffect(() => {
-    console.log("this should only print once");
     fetchCalendarData(displayDate);
+  }, [displayDate]);
+
+  // for debugging
+  useEffect(() => {
     console.log("monthData:", monthData);
-  }, [])
+  }, [monthData]);
 
-  const handleChangeMonth = () => {
-    fetchCalendarData(displayDate);
-    console.log("monthData:", monthData);
-  }
-
-  const handleClick = () => {
-
+  const handleClick = (dayOfMonth: number) => {
+    // call setSelectedEvent and update what the eventInfo section displays
+    setSelectedEvent(monthData[dayOfMonth][0]);
   }
 
   const offset = getStartDateOffset(displayDate);
@@ -95,11 +94,9 @@ export default function Events() {
         <div className="flex space-x-2">
           <button onClick={() => {
             setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
-            handleChangeMonth();
           }} className={styles.arrow}>{"<"}</button>
           <button onClick={() => {
             setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
-            handleChangeMonth();
           }} className={styles.arrow}>{">"}</button>
         </div>
       </div>
@@ -119,11 +116,14 @@ export default function Events() {
           <div className={styles.calendar}>
 
             {Array.from({ length: 42 }, (_, index) => (
-              <div onClick={handleClick} className={styles.calendarCell} key={index}>
+              <div className={styles.calendarCell} key={index}>
                 {(index >= offset && index - offset + 1 <= totalDays) && (
                   <>
                     <div className={styles.calendarCellNumber}>{String(index - offset + 1).padStart(2, "0")}</div>
-                    <div className={styles.calendarEvent}>text</div>
+                    {((index - offset + 1) in monthData) && (<div onClick={() => handleClick(index - offset + 1)} className={styles.calendarEvent}>{monthData[index - offset + 1][0].summary}</div>)}
+                    {/* {Array.from({ length: monthData[index - offset + 1] ? monthData[index - offset + 1].length : 0 }, (_, idx) => {
+                      <div onClick={() => handleClick(index - offset + 1)} className={styles.calendarEvent}>text</div>
+                    })} */}
                   </>
                 )}
               </div>
@@ -132,17 +132,17 @@ export default function Events() {
         </div>
 
         <div className="col-span-1 p-4">
-          <div className={styles.eventHeader}>Event Information</div>
+          <div className={styles.eventInfoHeader}>Event Information</div>
           {selectedEvent === null && <div>Click on an event to see more details!</div>}
-          {selectedEvent !== null && <div className={styles.eventContainer}>
-            <div className={styles.eventTitle}>
-              Poker Lecture 1
+          {selectedEvent !== null && <div className={styles.eventInfoContainer}>
+            <div className={styles.eventInfoTitle}>
+              {selectedEvent.summary}
             </div>
-            <div className={styles.eventSubtitle}>
-              What is a range?
+            <div className={styles.eventInfoSubtitle}>
+              Location: {selectedEvent.location}
             </div>
-            <div className={styles.eventText}>
-
+            <div className={styles.eventInfoText}>
+              {selectedEvent.description}
             </div>
           </div>}
         </div>

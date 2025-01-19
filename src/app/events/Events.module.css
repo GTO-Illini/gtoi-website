@@ -36,6 +36,8 @@
   background: #46c5ff;
   padding: 2%;
   font-size: 0.8rem;
+  font-family: sans-serif;
+  cursor: pointer;
 }
 
 .calendarHeader {
@@ -55,7 +57,7 @@
   color: #ffffff;
 }
 
-.eventContainer {
+.eventInfoContainer {
   color: #000;
   background-color: white;
   padding: 1rem;
@@ -64,18 +66,16 @@
   border-radius: 5px;
 }
 
-.eventTitle {
+.eventInfoTitle {
   color: #000;
-  font-family: Inter;
   font-size: 2rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.eventSubtitle {
+.eventInfoSubtitle {
   color: #000;
-  font-family: Inter;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
@@ -83,18 +83,17 @@
   padding: 0.5rem 0;
 }
 
-.eventText {
+.eventInfoText {
   flex-shrink: 0;
   color: #000;
   text-align: justify;
-  font-family: Inter;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.eventHeader {
+.eventInfoHeader {
   display: grid;
   text-align: center;
   font-weight: bold;
