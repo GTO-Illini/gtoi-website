@@ -31,15 +31,27 @@ const Calendar = () => {
   const offset = getStartDateOffset();
   const totalDays = getDaysInMonth();
   return (
-    <div className={styles.calendar}>
-      {Array.from({ length: 42 }, (_, index) => (
-        <div className={styles.calendarCell} key={index}>
-          {(index >= offset && index - offset + 1 <= totalDays) && (
-            <div>{index - offset + 1}</div>
-          )}
-        </div>
-      ))}
-    </div>
+    <>
+      <div className={styles.calendarHeader}>
+        <div className={styles.day}>Sun</div>
+        <div className={styles.day}>Mon</div>
+        <div className={styles.day}>Tue</div>
+        <div className={styles.day}>Wed</div>
+        <div className={styles.day}>Thu</div>
+        <div className={styles.day}>Fri</div>
+        <div className={styles.day}>Sat</div>
+      </div>
+      <div className={styles.calendar}>
+
+        {Array.from({ length: 42 }, (_, index) => (
+          <div className={styles.calendarCell} key={index}>
+            {(index >= offset && index - offset + 1 <= totalDays) && (
+              <div>{index - offset + 1}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
