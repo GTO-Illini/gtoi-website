@@ -1,30 +1,58 @@
+"use client"
+
+import { useState } from "react";
 import styles from "./Events.module.css";
 
-function getDaysInMonth(): number {
-  const today = new Date();
-  const isLeapYear = (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0) || (today.getFullYear() % 400 === 0);
+function getDaysInMonth(date: Date) {
+  const isLeapYear = (date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || (date.getFullYear() % 400 === 0);
   const numDays = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return numDays[today.getMonth()];
+  return numDays[date.getMonth()];
 }
 
-function getStartDateOffset() {
-  const firstDay = new Date();
+function getStartDateOffset(date: Date) {
+  const firstDay = new Date(date.getFullYear(), date.getMonth());
   firstDay.setDate(1);
   return firstDay.getDay();
 }
 
 export default function Events() {
-  const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
-  const currentYear = currentDate.getFullYear();
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const handleClick = () => {
+    const apiKey = "AIzaSyDldUJyWFJnNQ-nkUndqNwc_dYHprGC1bU";
+    const timeMin = "2025-01-19T00:00:00-06:00"; // need to make date a variable
+    const timeMax = "2025-01-19T23:59:59-06:00";
+    const singleEvents = "true";
+    const orderBy = "startTime";
+    fetch(`https://www.googleapis.com/calendar/v3/calendars/gtoillini@gmail.com/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=${singleEvents}&orderBy=${orderBy}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
 
-  const offset = getStartDateOffset();
-  const totalDays = getDaysInMonth();
+  const currentDate = new Date();
+  const [displayDate, setDisplayDate] = useState(new Date());
+
+  const offset = getStartDateOffset(displayDate);
+  const totalDays = getDaysInMonth(displayDate);
   return (
     <main className="min-h-screen pl-16 pr-16">
 
       <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-white" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
-      <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-white">{currentMonth} {currentYear}</h3>
+      <div className="flex justify-between">
+        <h3 className="col-span-1 pl-4 text-xl md:text-2xl lg:text-3xl text-white">{displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}</h3>
+        <div className="flex space-x-2">
+          <button onClick={() => {
+            return setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
+          }} className={styles.arrow}>{"<"}</button>
+          <button onClick={() => {
+            return setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
+          }} className={styles.arrow}>{">"}</button>
+        </div>
+      </div>
 
       <div className="grid grid-cols-3 gap-4">
 
@@ -41,7 +69,7 @@ export default function Events() {
           <div className={styles.calendar}>
 
             {Array.from({ length: 42 }, (_, index) => (
-              <div className={styles.calendarCell} key={index}>
+              <div onClick={handleClick} className={styles.calendarCell} key={index}>
                 {(index >= offset && index - offset + 1 <= totalDays) && (
                   <div>{String(index - offset + 1).padStart(2, "0")}</div>
                 )}
@@ -52,7 +80,8 @@ export default function Events() {
 
         <div className="col-span-1 p-4">
           <div className={styles.eventHeader}>Event Information</div>
-          <div className={styles.eventContainer}>
+          {selectedEvent === null && <div>Click on an event to see more details!</div>}
+          {selectedEvent !== null && <div className={styles.eventContainer}>
             <div className={styles.eventTitle}>
               Poker Lecture 1
             </div>
@@ -60,9 +89,9 @@ export default function Events() {
               What is a range?
             </div>
             <div className={styles.eventText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
             </div>
-          </div>
+          </div>}
         </div>
 
       </div>
