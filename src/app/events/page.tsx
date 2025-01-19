@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Events.module.css";
 
 function getDaysInMonth(date: Date) {
@@ -15,26 +15,74 @@ function getStartDateOffset(date: Date) {
   return firstDay.getDay();
 }
 
+// function getCalendarData(date: Date) {
+//   const year = String(date.getFullYear())
+//   const month = String(date.getMonth() + 1).padStart(2, "0");
+//   const totalDays = getDaysInMonth(date);
+//   const apiKey = "AIzaSyDldUJyWFJnNQ-nkUndqNwc_dYHprGC1bU";
+//   const timeMin = `${year}-${month}-01T00:00:00-06:00`;
+//   const timeMax = `${year}-${month}-${totalDays}T23:59:59-06:00`;
+//   const singleEvents = "true";
+//   const orderBy = "startTime";
+//   return fetch(`https://www.googleapis.com/calendar/v3/calendars/gtoillini@gmail.com/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=${singleEvents}&orderBy=${orderBy}`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data);
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+// }
+
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const handleClick = () => {
-    const apiKey = "AIzaSyDldUJyWFJnNQ-nkUndqNwc_dYHprGC1bU";
-    const timeMin = "2025-01-19T00:00:00-06:00"; // need to make date a variable
-    const timeMax = "2025-01-19T23:59:59-06:00";
-    const singleEvents = "true";
-    const orderBy = "startTime";
-    fetch(`https://www.googleapis.com/calendar/v3/calendars/gtoillini@gmail.com/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=${singleEvents}&orderBy=${orderBy}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
+  const [displayDate, setDisplayDate] = useState(new Date());
+  const [monthData, setMonthData] = useState<{ [key: number]: any }>({});
+
+  const fetchCalendarData = async (date: Date) => {
+    try {
+      const year = String(date.getFullYear())
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const totalDays = getDaysInMonth(date);
+      const apiKey = "AIzaSyDldUJyWFJnNQ-nkUndqNwc_dYHprGC1bU";
+      const timeMin = `${year}-${month}-01T00:00:00-06:00`;
+      const timeMax = `${year}-${month}-${totalDays}T23:59:59-06:00`;
+      const singleEvents = "true";
+      const orderBy = "startTime";
+      const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/gtoillini@gmail.com/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=${singleEvents}&orderBy=${orderBy}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      const events = result['items'];
+      setMonthData(() => {
+        const tempData: { [key: number]: any } = {};
+        for (const event of events) {
+          const dateObj = new Date(event['start']['dateTime']);
+          const dayOfMonth = dateObj.getDate();
+          tempData[dayOfMonth] = tempData[dayOfMonth] ? [...tempData[dayOfMonth], { id: event['id'], summary: event['summary'] }] : [{ id: event['id'], summary: event['summary'] }];
+        }
+        return tempData;
       });
+    } catch (err) {
+      console.log("error!");
+    }
   }
 
-  const currentDate = new Date();
-  const [displayDate, setDisplayDate] = useState(new Date());
+  useEffect(() => {
+    console.log("this should only print once");
+    fetchCalendarData(displayDate);
+    console.log("monthData:", monthData);
+  }, [])
+
+  const handleChangeMonth = () => {
+    fetchCalendarData(displayDate);
+    console.log("monthData:", monthData);
+  }
+
+  const handleClick = () => {
+
+  }
 
   const offset = getStartDateOffset(displayDate);
   const totalDays = getDaysInMonth(displayDate);
@@ -46,10 +94,12 @@ export default function Events() {
         <h3 className="col-span-1 pl-4 text-xl md:text-2xl lg:text-3xl text-white">{displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}</h3>
         <div className="flex space-x-2">
           <button onClick={() => {
-            return setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
+            setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
+            handleChangeMonth();
           }} className={styles.arrow}>{"<"}</button>
           <button onClick={() => {
-            return setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
+            setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
+            handleChangeMonth();
           }} className={styles.arrow}>{">"}</button>
         </div>
       </div>
@@ -71,7 +121,10 @@ export default function Events() {
             {Array.from({ length: 42 }, (_, index) => (
               <div onClick={handleClick} className={styles.calendarCell} key={index}>
                 {(index >= offset && index - offset + 1 <= totalDays) && (
-                  <div>{String(index - offset + 1).padStart(2, "0")}</div>
+                  <>
+                    <div className={styles.calendarCellNumber}>{String(index - offset + 1).padStart(2, "0")}</div>
+                    <div className={styles.calendarEvent}>text</div>
+                  </>
                 )}
               </div>
             ))}

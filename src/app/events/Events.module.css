@@ -10,7 +10,7 @@
   display: flex;
   width: 100%;
   aspect-ratio: 5 / 4;
-  padding: 5%;
+  padding: 0;
   flex-direction: column;
   justify-content: right;
   align-items: flex-end;
@@ -23,6 +23,19 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.calendarCellNumber {
+  padding: 5% 5% 0 0;
+}
+
+.calendarEvent {
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
+  background: #46c5ff;
+  padding: 2%;
+  font-size: 0.8rem;
 }
 
 .calendarHeader {
