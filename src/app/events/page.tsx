@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import styles from "./Events.module.css";
+import { list } from "postcss";
 
 function getDaysInMonth(date: Date) {
   const isLeapYear = (date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) || (date.getFullYear() % 400 === 0);
@@ -37,10 +38,16 @@ function getStartDateOffset(date: Date) {
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [displayDate, setDisplayDate] = useState(new Date());
-  const [monthData, setMonthData] = useState<{ [key: number]: any }>({});
+  const [prefetchedMonthData, setPrefetchedMonthData] = useState<{
+    prev: any;
+    curr: any;
+    next: any;
+  }>({ prev: null, curr: null, next: null });
+  const [monthData, setMonthData] = useState<any>(null);
+
 
   const fetchCalendarData = async (date: Date) => {
-    try {
+    const fetchFromDate = async (date: Date) => {
       const year = String(date.getFullYear())
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const totalDays = getDaysInMonth(date);
@@ -54,15 +61,33 @@ export default function Events() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
-      const events = result['items'];
-      setMonthData(() => {
-        const tempData: { [key: number]: any } = {};
-        for (const event of events) {
-          const dateObj = new Date(event['start']['dateTime']);
-          const dayOfMonth = dateObj.getDate();
-          tempData[dayOfMonth] = tempData[dayOfMonth] ? [...tempData[dayOfMonth], event] : [event];
+      return result['items'];
+    }
+    try {
+      const prevMonthDate = new Date(date);
+      const nextMonthDate = new Date(date);
+      prevMonthDate.setMonth(date.getMonth() - 1);
+      nextMonthDate.setMonth(date.getMonth() + 1);
+
+      const monthArray = await Promise.all([
+        fetchFromDate(prevMonthDate),
+        fetchFromDate(date),
+        fetchFromDate(nextMonthDate),
+      ])
+      setPrefetchedMonthData(() => {
+        const tempDataArray = [];
+        for (const month of monthArray) {
+          const tempData: { [key: number]: any } = {};
+          for (const event of month) {
+            const dateObj = new Date(event['start']['dateTime']);
+            const dayOfMonth = dateObj.getDate();
+            tempData[dayOfMonth] = tempData[dayOfMonth] ? [...tempData[dayOfMonth], event] : [event];
+          }
+          tempDataArray.push(tempData);
         }
-        return tempData;
+        const updatedMonthData = { prev: tempDataArray[0], curr: tempDataArray[1], next: tempDataArray[2] };
+        setMonthData(updatedMonthData.curr);
+        return updatedMonthData;
       });
     } catch (err) {
       console.log("error!");
@@ -70,6 +95,7 @@ export default function Events() {
   }
 
   useEffect(() => {
+    // prefetch calendar data
     fetchCalendarData(displayDate);
   }, [displayDate]);
 
@@ -79,7 +105,6 @@ export default function Events() {
   }, [monthData]);
 
   const handleClick = (event: any) => {
-    // call setSelectedEvent and update what the eventInfo section displays
     setSelectedEvent(event);
   }
 
@@ -93,9 +118,11 @@ export default function Events() {
         <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-white">{displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}</h3>
         <div className="flex space-x-2">
           <button onClick={() => {
+            setMonthData(prefetchedMonthData.prev);
             setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
           }} className={styles.arrow}>{"<"}</button>
           <button onClick={() => {
+            setMonthData(prefetchedMonthData.next);
             setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
           }} className={styles.arrow}>{">"}</button>
         </div>
@@ -120,7 +147,7 @@ export default function Events() {
                 {(index >= offset && index - offset + 1 <= totalDays) && (
                   <>
                     <div className={styles.calendarCellNumber}>{String(index - offset + 1).padStart(2, "0")}</div>
-                    {((index - offset + 1) in monthData) && (
+                    {(monthData && (index - offset + 1) in monthData) && ( // the first monthData check is to account for the brief period of time when monthData's vale is still null
                       Array.from(monthData[index - offset + 1], (entry: any, entryIndex: number) => (
                         <div onClick={() => handleClick(entry)} className={styles.calendarEvent} key={entryIndex}>{entry.summary}</div>
                       ))
