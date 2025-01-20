@@ -134,7 +134,7 @@ export default function Events() {
           <div className={styles.calendarHeader}>
             {/* spacing isn't perfect for calendar day names, fix later */}
             {Array.from({ length: 7 }, (_, index) => (
-              <div className={styles.day}>{new Date(1983, 0, 1 + index).toLocaleDateString('default', { weekday: 'short' })}</div>
+              <div className={styles.day} key={index}>{new Date(1983, 0, 1 + index).toLocaleDateString('default', { weekday: 'short' })}</div>
             ))}
           </div>
           <div className={styles.calendar}>
@@ -159,7 +159,7 @@ export default function Events() {
         <div className="col-span-1 p-4">
           <div className={styles.eventInfoHeader}>Event Information</div>
           {selectedEvent === null && <div>Click on an event to see more details!</div>}
-          {selectedEvent !== null && <div className={styles.eventInfoContainer}>
+          {selectedEvent !== null && <div className={styles.eventInfoContainer  /* container height doesn't match calendar height */}>
             <div className={styles.eventInfoTitle}>
               {selectedEvent.summary}
             </div>
