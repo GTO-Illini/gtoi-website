@@ -140,7 +140,7 @@ export default function Events() {
               {selectedEvent.summary}
             </div>
             <div className={styles.eventInfoSubtitle}>
-              Location: {selectedEvent.location}
+              Location: {selectedEvent.location ? selectedEvent.location : "TBD"}
             </div>
             <div className={styles.eventInfoText}>
               {selectedEvent.description}
