@@ -132,13 +132,10 @@ export default function Events() {
 
         <div className="col-span-2 p-4">
           <div className={styles.calendarHeader}>
-            <div className={styles.day}>Sun</div>
-            <div className={styles.day}>Mon</div>
-            <div className={styles.day}>Tue</div>
-            <div className={styles.day}>Wed</div>
-            <div className={styles.day}>Thu</div>
-            <div className={styles.day}>Fri</div>
-            <div className={styles.day}>Sat</div>
+            {/* spacing isn't perfect for calendar day names, fix later */}
+            {Array.from({ length: 7 }, (_, index) => (
+              <div className={styles.day}>{new Date(1983, 0, 1 + index).toLocaleDateString('default', { weekday: 'short' })}</div>
+            ))}
           </div>
           <div className={styles.calendar}>
 
