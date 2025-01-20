@@ -78,9 +78,9 @@ export default function Events() {
     console.log("monthData:", monthData);
   }, [monthData]);
 
-  const handleClick = (dayOfMonth: number) => {
+  const handleClick = (event: any) => {
     // call setSelectedEvent and update what the eventInfo section displays
-    setSelectedEvent(monthData[dayOfMonth][0]);
+    setSelectedEvent(event);
   }
 
   const offset = getStartDateOffset(displayDate);
@@ -89,8 +89,8 @@ export default function Events() {
     <main className="min-h-screen pl-16 pr-16">
 
       <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-white" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
-      <div className="flex justify-between">
-        <h3 className="col-span-1 pl-4 text-xl md:text-2xl lg:text-3xl text-white">{displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}</h3>
+      <div className="grid grid-cols-2">
+        <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-white">{displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}</h3>
         <div className="flex space-x-2">
           <button onClick={() => {
             setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
@@ -120,10 +120,11 @@ export default function Events() {
                 {(index >= offset && index - offset + 1 <= totalDays) && (
                   <>
                     <div className={styles.calendarCellNumber}>{String(index - offset + 1).padStart(2, "0")}</div>
-                    {((index - offset + 1) in monthData) && (<div onClick={() => handleClick(index - offset + 1)} className={styles.calendarEvent}>{monthData[index - offset + 1][0].summary}</div>)}
-                    {/* {Array.from({ length: monthData[index - offset + 1] ? monthData[index - offset + 1].length : 0 }, (_, idx) => {
-                      <div onClick={() => handleClick(index - offset + 1)} className={styles.calendarEvent}>text</div>
-                    })} */}
+                    {((index - offset + 1) in monthData) && (
+                      Array.from(monthData[index - offset + 1], (entry: any, entryIndex: number) => (
+                        <div onClick={() => handleClick(entry)} className={styles.calendarEvent} key={entryIndex}>{entry.summary}</div>
+                      ))
+                    )}
                   </>
                 )}
               </div>
