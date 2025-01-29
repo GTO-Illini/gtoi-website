@@ -16,7 +16,7 @@ export default function About() {
     {
       title: "Treasurer",
       name: "Rose Zhang",
-      image: "/image-assets/leadership_photos/default.png",
+      image: "/image-assets/leadership_photos/rose_profile.png",
       linkedin: "https://www.linkedin.com/in/rose-zhang-m/"
     },
     {
