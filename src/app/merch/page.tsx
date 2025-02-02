@@ -25,7 +25,7 @@ export default function Merch() {
   ];
  return (
    <main className="min-h-screen p-8">
-     <h1 className="text-4xl font-bold mb-6 flex justify-center">Merchandise</h1>
+     <h1 className="text-4xl font-bold mb-10 flex justify-center">Merchandise</h1>
      <p className="text-xl mb-6 flex justify-center">GTO Illini merchandise purchase form will be available here soon.</p>
      <div className={"flex justify-center gap-24 mt-10"}>
      {merch.map((item, index) => (
