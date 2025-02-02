@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import hoodie from './hoodie.jpeg'
-import poker_cards from './playing_cards.jpeg'
-import pin_button from './pin_button.jpeg'
+// import Image from 'next/image';
+// import hoodie from './hoodie.jpeg'
+// import poker_cards from './playing_cards.jpeg'
+// import pin_button from './pin_button.jpeg'
 import styles from './Merch.module.css';
 
 

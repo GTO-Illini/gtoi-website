@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -7,14 +7,13 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link href="/" className={styles.logoLink}>
-          <Image
-            src="/GTOIlliniLogoSuits.png"
-            alt="GTO Illini Logo"
-            width={100}
-            height={100}
-            className={styles.logoImage}
-            priority
-          />
+        <img
+          src="/image-assets/GTOIlliniLogoSuits.png"
+          alt="GTO Illini Logo"
+          width="100"
+          height="100"
+          className={styles.logoImage}
+        />
           <span className={styles.logoText}>GTO Illini</span>
         </Link>
       </div>

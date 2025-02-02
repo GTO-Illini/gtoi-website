@@ -38,7 +38,7 @@ export default function About() {
       <h1 className="text-3xl font-bold mb-6">About Us</h1>
         <div className="mb-6">
           <h2 className="text-2xl font-bold">Lectures</h2>
-            <p className="mt-2">GTO Illini presents regular lectures on a variety of poker topics, ranging from the basics to deep dives into advanced concepts. Check out our events page to make sure you don't miss any, and our resources page to take a look at past lectures.</p>
+            <p className="mt-2">GTO Illini presents regular lectures on a variety of poker topics, ranging from the basics to deep dives into advanced concepts. Check out our events page to make sure you don&apos;t miss any, and our resources page to take a look at past lectures.</p>
         </div>
         <div className="mb-6">
           <h2 className="text-2xl font-bold">Development</h2>

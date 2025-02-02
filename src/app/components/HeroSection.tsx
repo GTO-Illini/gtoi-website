@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 
 const images = [
-  "/landing-page-slideshow/IMG_4629.jpg",
-  "/landing-page-slideshow/20240405_235638_4dba6283.jpg",
-  "/landing-page-slideshow/20240426_222933_e97bb73b.jpg",
+  "/image-assets/landing-page-slideshow/IMG_4629.jpg",
+  "/image-assets/landing-page-slideshow/20240405_235638_4dba6283.jpg",
+  "/image-assets/landing-page-slideshow/20240426_222933_e97bb73b.jpg",
 ];
 
 export default function HeroSection() {
@@ -26,16 +26,20 @@ export default function HeroSection() {
     <div className="relative w-full h-screen">
       <div className="absolute inset-0">
         {images.map((image, index) => (
-          <Image
-            key={image}
-            src={image}
-            alt={`Slideshow image ${index + 1}`}
-            fill
-            priority={index === 0}
-            className={`object-cover transition-opacity duration-1000 ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            } absolute inset-0`}
-          />
+          <img
+          key={image}
+          src={image}
+          alt={`Slideshow image ${index + 1}`}
+          className={`object-cover transition-opacity duration-1000 ${
+            index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+          } absolute inset-0`}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
         ))}
       </div>
       <div className="absolute inset-0 bg-black/30"></div>

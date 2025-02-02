@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+// import { useState, useEffect } from "react";
+// import Image from "next/image";
 import HeroSection from "./components/HeroSection";
 import InfoCard from "./components/InfoCard";
 
