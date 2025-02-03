@@ -4,13 +4,13 @@ export default function About() {
     {
       title: "President",
       name: "Patrick Smith",
-      image: "/image-assets/leadership_photos/default.png",
+      image: "/image-assets/leadership_photos/patsmithgaming.jpg",
       linkedin: "https://www.linkedin.com/in/patrick-o-smith/"
     },
     {
       title: "Vice President",
       name: "Kevin Zhang",
-      image: "/image-assets/leadership_photos/default.png",
+      image: "/image-assets/leadership_photos/kevin_headshot.jpg",
       linkedin: "https://www.linkedin.com/in/kevin-y-zhang/"
     },
     {
@@ -22,7 +22,7 @@ export default function About() {
     {
       title: "Secretary",
       name: "Owen Vela",
-      image: "/image-assets/leadership_photos/default.png",
+      image: "/image-assets/leadership_photos/owen_headshot.png",
       linkedin: "https://www.linkedin.com/in/owen-vela/"
     },
     {
@@ -64,9 +64,59 @@ export default function About() {
                   />
                   <h3 className="text-xl font-bold">{leader.title}</h3>
                   <p className="text-l font-bold">{leader.name}</p>
+                  <a
+                    href={leader.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 mt-2 text-blue-500 hover:underline">
+
+                  <img
+                    src="/image-assets/LinkedIn_icon.svg" // Replace with the path to your LinkedIn icon
+                    alt="LinkedIn"
+                    className="w-6 h-6"
+                    />
+                    Connect on LinkedIn
+                    </a>
                 </div>
+                
+
+
               ))}
             </div>
+        </div>
+        <div>
+          {/* <h2 className="text-2xl font-bold">Social Media</h2> */}
+              <div className="flex flex-col items-center mt-4 space-y-4">
+                {/*Instagram link*/}
+                <a
+                  href="https://www.instagram.com/gto_illini/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:underline"
+                >
+                  <img
+                    src="/image-assets/Instagram_logo_2016.svg"
+                    alt="Instagram"
+                    className="h-8 w-8 mr-2"
+                   />
+                   Follow us on Instagram!
+                  </a>
+
+                  {/*Discord link*/}
+                  <a
+                    href="https://discord.com/invite/4ZZCqMRTwQ" // Replace with your Discord invite link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-lg text-purple-500 hover:underline"
+                  >
+                    <img
+                      src="image-assets/discord-icon-svgrepo-com.svg" // Replace with the path to your Discord icon
+                      alt="Discord"
+                      className="w-8 h-8 mr-2"
+                    />
+                    Join our Discord Server
+                  </a>
+              </div>
         </div>
 
     </main>
