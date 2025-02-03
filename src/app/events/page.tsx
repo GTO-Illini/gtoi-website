@@ -164,7 +164,7 @@ export default function Events() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2 p-4">
+        <div className={styles.calendarWrapper}>
           <div className={styles.calendarHeader}>
             {Array.from({ length: 7 }, (_, index) => (
               <div className={styles.day} key={index}>
@@ -198,7 +198,7 @@ export default function Events() {
           </div>
         </div>
 
-        <div className="col-span-1 p-4">
+        <div className={styles.eventInfoWrapper}>
           <div className={styles.eventInfoHeader}>Event Information</div>
           {selectedEvent === null && <div>Click on an event to see more details!</div>}
           {selectedEvent !== null && (
