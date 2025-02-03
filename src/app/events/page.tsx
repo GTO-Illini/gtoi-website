@@ -135,10 +135,10 @@ export default function Events() {
 
   return (
     <main className="min-h-screen pl-16 pr-16">
-      <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-white" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
+      <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-black" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
       
       <div className="grid grid-cols-2">
-        <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-white">
+        <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-black">
           {displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}
         </h3>
         <div className="flex space-x-2">
