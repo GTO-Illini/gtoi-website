@@ -43,10 +43,10 @@ function getStartDateOffset(date: Date): number {
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState<GoogleCalendarEvent | null>(null);
   const [displayDate, setDisplayDate] = useState(new Date());
-  const [prefetchedMonthData, setPrefetchedMonthData] = useState<MonthData>({ 
-    prev: null, 
-    curr: null, 
-    next: null 
+  const [prefetchedMonthData, setPrefetchedMonthData] = useState<MonthData>({
+    prev: null,
+    curr: null,
+    next: null
   });
   const [monthData, setMonthData] = useState<EventData | null>(null);
 
@@ -60,14 +60,14 @@ export default function Events() {
       const timeMax = `${year}-${month}-${totalDays}T23:59:59-06:00`;
       const singleEvents = "true";
       const orderBy = "startTime";
-      
+
       try {
         const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/gtoillini@gmail.com/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=${singleEvents}&orderBy=${orderBy}`);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        
+
         const result = await response.json();
         return result['items'] as GoogleCalendarEvent[];
       } catch (error) {
@@ -94,7 +94,7 @@ export default function Events() {
           month.forEach(event => {
             const dateObj = new Date(event.start.dateTime);
             const dayOfMonth = dateObj.getDate();
-            
+
             if (!tempData[dayOfMonth]) {
               tempData[dayOfMonth] = [];
             }
@@ -103,12 +103,12 @@ export default function Events() {
           return tempData;
         });
 
-        const updatedMonthData = { 
-          prev: tempDataArray[0], 
-          curr: tempDataArray[1], 
-          next: tempDataArray[2] 
+        const updatedMonthData = {
+          prev: tempDataArray[0],
+          curr: tempDataArray[1],
+          next: tempDataArray[2]
         };
-        
+
         setMonthData(updatedMonthData.curr);
         return updatedMonthData;
       });
@@ -134,28 +134,28 @@ export default function Events() {
   const totalDays = getDaysInMonth(displayDate);
 
   return (
-    <main className="min-h-screen pl-16 pr-16">
+    <main className="min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 max-w-screen-xl mx-auto">
       <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-black" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
-      
+
       <div className="grid grid-cols-2">
         <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-black">
           {displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}
         </h3>
         <div className="flex space-x-2">
-          <button 
+          <button
             onClick={() => {
               setMonthData(prefetchedMonthData.prev);
               setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
-            }} 
+            }}
             className={styles.arrow}
           >
             {"<"}
           </button>
-          <button 
+          <button
             onClick={() => {
               setMonthData(prefetchedMonthData.next);
               setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
-            }} 
+            }}
             className={styles.arrow}
           >
             {">"}
@@ -168,7 +168,7 @@ export default function Events() {
           <div className={styles.calendarHeader}>
             {Array.from({ length: 7 }, (_, index) => (
               <div className={styles.day} key={index}>
-                {new Date(1983, 0, 1 + index).toLocaleDateString('default', { weekday: 'short' })}
+                {new Date(1983, 0, 2 + index).toLocaleDateString('default', { weekday: 'short' })}
               </div>
             ))}
           </div>
@@ -182,9 +182,9 @@ export default function Events() {
                     </div>
                     {(monthData && (index - offset + 1) in monthData) && (
                       monthData[index - offset + 1].map((entry, entryIndex) => (
-                        <div 
-                          onClick={() => handleClick(entry)} 
-                          className={styles.calendarEvent} 
+                        <div
+                          onClick={() => handleClick(entry)}
+                          className={styles.calendarEvent}
                           key={entryIndex}
                         >
                           {entry.summary}
@@ -207,7 +207,7 @@ export default function Events() {
                 {selectedEvent.summary}
               </div>
               <div className={styles.eventInfoSubtitle}>
-                Location: {selectedEvent.location ? selectedEvent.location : "TBD"}
+                Location: {selectedEvent.location ? selectedEvent.location?.split(",")[0] : "TBD"}
               </div>
               <div className={styles.eventInfoText}>
                 {selectedEvent.description}
