@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function About() {
 
   const leadership = [
@@ -53,13 +55,12 @@ export default function About() {
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 mt-4">
               {leadership.map((leader, index) => (
                 <div key={index} className="flex flex-col items-center text-center">
-                  <img
+                  <Image
                     src={leader.image}
                     alt={leader.name}
-                    loading="lazy"
-                    width="800"
-                    height="800"
-                    decoding="async"
+                    width={800}
+                    height={800}
+                    unoptimized={true}
                     className="aspect-square w-full max-w-56 max-h-56 object-cover rounded-full mb-2" // Added styling for image
                   />
                   <h3 className="text-xl font-bold">{leader.title}</h3>
@@ -70,9 +71,12 @@ export default function About() {
                     rel="noopener noreferrer" 
                     className="flex items-center gap-2 mt-2 text-blue-500 hover:underline">
 
-                  <img
+                  <Image
                     src="/image-assets/LinkedIn_icon.svg" // Replace with the path to your LinkedIn icon
                     alt="LinkedIn"
+                    width={24}
+                    height={24}
+                    unoptimized={true}
                     className="w-6 h-6"
                     />
                     Connect on LinkedIn
@@ -85,38 +89,41 @@ export default function About() {
             </div>
         </div>
         <div>
-          {/* <h2 className="text-2xl font-bold">Social Media</h2> */}
-              <div className="flex flex-col items-center mt-4 space-y-4">
-                {/*Instagram link*/}
-                <a
-                  href="https://www.instagram.com/gto_illini/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:underline"
-                >
-                  <img
-                    src="/image-assets/Instagram_logo_2016.svg"
-                    alt="Instagram"
-                    className="h-8 w-8 mr-2"
-                   />
-                   Follow us on Instagram!
-                  </a>
+          <div className="flex flex-col items-center mt-4 space-y-4">
+            <a
+              href="https://www.instagram.com/gto_illini/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:underline"
+            >
+              <Image
+                src="/image-assets/Instagram_logo_2016.svg"
+                alt="Instagram"
+                width={32}
+                height={32}
+                unoptimized={true}
+                className="h-8 w-8 mr-2"
+              />
+              Follow us on Instagram!
+            </a>
 
-                  {/*Discord link*/}
-                  <a
-                    href="https://discord.com/invite/4ZZCqMRTwQ" // Replace with your Discord invite link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-lg text-purple-500 hover:underline"
-                  >
-                    <img
-                      src="image-assets/discord-icon-svgrepo-com.svg" // Replace with the path to your Discord icon
-                      alt="Discord"
-                      className="w-8 h-8 mr-2"
-                    />
-                    Join our Discord Server
-                  </a>
-              </div>
+            <a
+              href="https://discord.com/invite/4ZZCqMRTwQ" // Replace with your Discord invite link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-lg text-purple-500 hover:underline"
+            >
+              <Image
+                src="/image-assets/discord-icon-svgrepo-com.svg" // Replace with the path to your Discord icon
+                alt="Discord"
+                width={32}
+                height={32}
+                unoptimized={true}
+                className="w-8 h-8 mr-2"
+              />
+              Join our Discord Server
+            </a>
+          </div>
         </div>
 
     </main>

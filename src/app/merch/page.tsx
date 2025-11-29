@@ -1,9 +1,4 @@
-// import Image from 'next/image';
-// import hoodie from './hoodie.jpeg'
-// import poker_cards from './playing_cards.jpeg'
-// import pin_button from './pin_button.jpeg'
-import styles from './Merch.module.css';
-
+import Image from 'next/image';
 
 export default function Merch() {
   const merch = [
@@ -30,12 +25,13 @@ export default function Merch() {
      <div className={"flex justify-center gap-24 mt-10"}>
      {merch.map((item, index) => (
                 <div key={index} className="flex flex-col items-center text-center">
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
-                    loading="lazy"
-                    decoding="async"
-                    className={styles.merchImage}
+                    width={300}
+                    height={300}
+                    unoptimized={true}
+                    className="object-contain h-auto max-h-72 w-auto flex-shrink-0 border-2 border-black box-border"
                   />
                   <p className="mt-2 text-center">{`${item.name}: ${item.price}`}</p>
                 </div>

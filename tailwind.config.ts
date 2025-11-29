@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "primary-blue": "#143560",
+      },
+      fontFamily: {
+        "jqkas-wild": ["var(--font-jqkas-wild)"],
       },
     },
   },
