@@ -7,7 +7,7 @@ import InfoCard from "./components/InfoCard";
 
 export default function Home() {
   return (
-    <main>
+    <main style={{ backgroundColor: "#0a0e1a" }}>
       <HeroSection />
       <InfoCard 
         title="What is GTO Illini?"
