@@ -134,14 +134,23 @@ export default function Events() {
   const totalDays = getDaysInMonth(displayDate);
 
   return (
-    <main className="min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 max-w-screen-xl mx-auto">
-      <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-black" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
+    <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
+      {/* Page header */}
+      <div className="px-6 py-10 text-center" style={{ backgroundColor: "var(--primary)" }}>
+        <h1 className="text-5xl md:text-6xl font-normal text-white" style={{ fontFamily: "var(--font-jqkas-wild)" }}>
+          Our Events
+        </h1>
+      </div>
 
-      <div className="grid grid-cols-2">
-        <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-black">
+      <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 max-w-screen-xl mx-auto py-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3
+          className="text-xl md:text-2xl font-semibold"
+          style={{ fontFamily: "var(--font-geist-sans)", color: "var(--foreground)" }}
+        >
           {displayDate.toLocaleString('default', { month: 'long' })} {displayDate.getFullYear()}
         </h3>
-        <div className="flex space-x-2">
+        <div className="flex gap-2">
           <button
             onClick={() => {
               setMonthData(prefetchedMonthData.prev);
@@ -149,7 +158,7 @@ export default function Events() {
             }}
             className={styles.arrow}
           >
-            {"<"}
+            ‹
           </button>
           <button
             onClick={() => {
@@ -158,13 +167,13 @@ export default function Events() {
             }}
             className={styles.arrow}
           >
-            {">"}
+            ›
           </button>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2 p-4">
+        <div className="col-span-2">
           <div className={styles.calendarHeader}>
             {Array.from({ length: 7 }, (_, index) => (
               <div className={styles.day} key={index}>
@@ -198,9 +207,16 @@ export default function Events() {
           </div>
         </div>
 
-        <div className="col-span-1 p-4">
+        <div className="col-span-1">
           <div className={styles.eventInfoHeader}>Event Information</div>
-          {selectedEvent === null && <div>Click on an event to see more details!</div>}
+          {selectedEvent === null && (
+            <div
+              className="text-sm px-3 py-2"
+              style={{ color: "var(--muted)", fontFamily: "var(--font-geist-sans)" }}
+            >
+              Click on an event to see more details
+            </div>
+          )}
           {selectedEvent !== null && (
             <div className={styles.eventInfoContainer}>
               <div className={styles.eventInfoTitle}>
@@ -215,6 +231,7 @@ export default function Events() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </main>
   );
