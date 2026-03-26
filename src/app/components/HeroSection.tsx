@@ -1,67 +1,70 @@
 "use client";
 
-// import { useState, useEffect } from "react";
-// import Image from "next/image";
-
-// const images = [
-//   "/image-assets/landing-page-slideshow/IMG_4629.jpg",
-//   "/image-assets/landing-page-slideshow/20240405_235638_4dba6283.jpg",
-//   "/image-assets/landing-page-slideshow/20240426_222933_e97bb73b.jpg",
-// ];
+import Link from "next/link";
 
 export default function HeroSection() {
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentImageIndex((prevIndex) => 
-  //       prevIndex === images.length - 1 ? 0 : prevIndex + 1
-  //     );
-  //   }, 7000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full" style={{ height: "calc(100vh - 64px)" }}>
       <div className="absolute inset-0">
-        {/* {images.map((image, index) => (
-          <img
-          key={image}
-          src={image}
-          alt={`Slideshow image ${index + 1}`}
-          className={`object-cover transition-opacity duration-1000 ${
-            index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-          } absolute inset-0`}
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-        ))} */
         <img
           src="image-assets/landing-page-slideshow/kevin_champ.jpg"
           alt="Hero Image"
-          className="object-cover absolute inset-0 w-full h-full"
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
+          className="absolute inset-0 w-full h-full object-cover"
         />
-      }
       </div>
-      <div className="absolute inset-0 bg-black/30"></div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center" style={{ fontFamily: 'var(--font-jqkas-wild)' }}>
-        <h1 className="text-4xl md:text-9xl font-normal mb-4">
+
+      {/* Gradient overlay — darker at bottom for text legibility */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.72) 100%)",
+        }}
+      />
+
+      <div
+        className="relative z-10 flex flex-col items-center justify-end h-full text-white text-center pb-20 px-4"
+        style={{ fontFamily: "var(--font-jqkas-wild)" }}
+      >
+        <h1 className="text-6xl md:text-8xl font-normal mb-3 drop-shadow-lg">
           GTO Illini
         </h1>
-        <p className="text-xl md:text-4xl max-w-2xl px-4">
+        <p
+          className="text-lg md:text-2xl max-w-xl mb-8 drop-shadow"
+          style={{ fontFamily: "var(--font-geist-sans)", fontWeight: 400, opacity: 0.9 }}
+        >
           Poker at the University of Illinois
         </p>
+        <div className="flex gap-4 flex-wrap justify-center">
+          <Link
+            href="/events"
+            className="px-6 py-3 rounded-lg font-medium text-white transition-all duration-200"
+            style={{
+              backgroundColor: "var(--primary)",
+              fontFamily: "var(--font-geist-sans)",
+              boxShadow: "0 2px 12px rgba(0,0,0,0.4)",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "var(--primary-hover)")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "var(--primary)")}
+          >
+            View Events
+          </Link>
+          <Link
+            href="/about"
+            className="px-6 py-3 rounded-lg font-medium transition-all duration-200"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.15)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.3)",
+              color: "#fff",
+              fontFamily: "var(--font-geist-sans)",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.25)")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)")}
+          >
+            Learn More
+          </Link>
+        </div>
       </div>
     </div>
   );

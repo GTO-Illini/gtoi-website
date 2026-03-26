@@ -1,124 +1,214 @@
 export default function About() {
-
   const leadership = [
     {
       title: "President",
       name: "Patrick Smith",
       image: "/image-assets/leadership_photos/patsmithgaming.jpg",
-      linkedin: "https://www.linkedin.com/in/patrick-o-smith/"
+      linkedin: "https://www.linkedin.com/in/patrick-o-smith/",
     },
     {
       title: "Vice President",
       name: "Kevin Zhang",
       image: "/image-assets/leadership_photos/kevin_headshot.jpg",
-      linkedin: "https://www.linkedin.com/in/kevin-y-zhang/"
+      linkedin: "https://www.linkedin.com/in/kevin-y-zhang/",
     },
     {
       title: "Treasurer",
       name: "Rose Zhang",
       image: "/image-assets/leadership_photos/rose_profile.png",
-      linkedin: "https://www.linkedin.com/in/rose-zhang-m/"
+      linkedin: "https://www.linkedin.com/in/rose-zhang-m/",
     },
     {
       title: "Secretary",
       name: "Owen Vela",
       image: "/image-assets/leadership_photos/owen_headshot.png",
-      linkedin: "https://www.linkedin.com/in/owen-vela/"
+      linkedin: "https://www.linkedin.com/in/owen-vela/",
     },
     {
       title: "Membership Director",
       name: "Peter Lin",
       image: "/image-assets/leadership_photos/peter_being_a_stud.jpg",
-      linkedin: "https://www.linkedin.com/in/peter-q-lin/"
+      linkedin: "https://www.linkedin.com/in/peter-q-lin/",
+    },
+  ];
+
+  const pillars = [
+    {
+      title: "Lectures",
+      description:
+        "GTO Illini presents regular lectures on a variety of poker topics, ranging from the basics to deep dives into advanced concepts. Check out our events page to make sure you don't miss any, and our resources page to take a look at past lectures.",
+    },
+    {
+      title: "Development",
+      description:
+        "To make poker learning as accessible as possible, GTO Illini is constantly developing new poker learning software for members to make use of. Check out our resources page to start using our tools and upping your game!",
+    },
+    {
+      title: "Competitions",
+      description:
+        "Poker is difficult to study practically without experience, so we hold regular online competitions to sharpen your knowledge and test your skills!",
     },
   ];
 
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">About Us</h1>
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold">Lectures</h2>
-            <p className="mt-2">GTO Illini presents regular lectures on a variety of poker topics, ranging from the basics to deep dives into advanced concepts. Check out our events page to make sure you don&apos;t miss any, and our resources page to take a look at past lectures.</p>
+    <main
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+    >
+
+      {/* Pillars */}
+      <div className="max-w-5xl mx-auto px-6 py-14">
+        <div className="grid gap-6 md:grid-cols-3">
+          {pillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="rounded-xl p-6"
+              style={{
+                border: "1px solid var(--border)",
+                backgroundColor: "var(--surface)",
+              }}
+            >
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                style={{ backgroundColor: "var(--primary-light)" }}
+              >
+                <span
+                  className="text-xs font-bold uppercase tracking-wider"
+                  style={{ color: "var(--primary)", fontFamily: "var(--font-geist-sans)" }}
+                >
+                  {pillar.title.slice(0, 2)}
+                </span>
+              </div>
+              <h2
+                className="text-xl font-semibold mb-2"
+                style={{ fontFamily: "var(--font-geist-sans)", color: "var(--foreground)" }}
+              >
+                {pillar.title}
+              </h2>
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)", fontFamily: "var(--font-geist-sans)" }}
+              >
+                {pillar.description}
+              </p>
+            </div>
+          ))}
         </div>
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold">Development</h2>
-            <p className="mt-2">To make poker learning as accessible as possible, GTO Illini is constantly developing new poker learning software for members to make use of. Check out our resources page to start using our tools and upping your game!</p>
-        </div>
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold">Competitions</h2>
-            <p className="mt-2">Poker is difficult to study practically without experience, so we hold regular online competitions to sharpen your knowledge and test your skills!</p>
-        </div>
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold">Leadership</h2>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 mt-4">
-              {leadership.map((leader, index) => (
-                <div key={index} className="flex flex-col items-center text-center">
+      </div>
+
+      {/* Leadership */}
+      <div
+        className="px-6 py-14"
+        style={{ backgroundColor: "var(--surface)", borderTop: "1px solid var(--border)" }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <h2
+            className="text-3xl font-normal mb-10 text-center"
+            style={{ fontFamily: "var(--font-jqkas-wild)", color: "var(--primary)" }}
+          >
+            Leadership
+          </h2>
+          <div className="grid gap-8 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+            {leadership.map((leader) => (
+              <div key={leader.name} className="flex flex-col items-center text-center group">
+                <div
+                  className="rounded-full overflow-hidden mb-3"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    border: "3px solid var(--primary-light)",
+                    boxShadow: "0 4px 12px rgba(20,53,96,0.12)",
+                  }}
+                >
                   <img
                     src={leader.image}
                     alt={leader.name}
                     loading="lazy"
-                    width="800"
-                    height="800"
+                    width="100"
+                    height="100"
                     decoding="async"
-                    className="aspect-square w-full max-w-56 max-h-56 object-cover rounded-full mb-2" // Added styling for image
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
-                  <h3 className="text-xl font-bold">{leader.title}</h3>
-                  <p className="text-l font-bold">{leader.name}</p>
-                  <a
-                    href={leader.linkedin} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center gap-2 mt-2 text-blue-500 hover:underline">
-
-                  <img
-                    src="/image-assets/LinkedIn_icon.svg" // Replace with the path to your LinkedIn icon
-                    alt="LinkedIn"
-                    className="w-6 h-6"
-                    />
-                    Connect on LinkedIn
-                    </a>
                 </div>
-                
-
-
-              ))}
-            </div>
-        </div>
-        <div>
-          {/* <h2 className="text-2xl font-bold">Social Media</h2> */}
-              <div className="flex flex-col items-center mt-4 space-y-4">
-                {/*Instagram link*/}
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider mb-0.5"
+                  style={{ color: "var(--muted)", fontFamily: "var(--font-geist-sans)" }}
+                >
+                  {leader.title}
+                </p>
+                <p
+                  className="text-sm font-semibold mb-2"
+                  style={{ color: "var(--foreground)", fontFamily: "var(--font-geist-sans)" }}
+                >
+                  {leader.name}
+                </p>
                 <a
-                  href="https://www.instagram.com/gto_illini/"
+                  href={leader.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:underline"
+                  className="flex items-center gap-1.5 text-xs transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "var(--primary)", fontFamily: "var(--font-geist-sans)" }}
                 >
                   <img
-                    src="/image-assets/Instagram_logo_2016.svg"
-                    alt="Instagram"
-                    className="h-8 w-8 mr-2"
-                   />
-                   Follow us on Instagram!
-                  </a>
-
-                  {/*Discord link*/}
-                  <a
-                    href="https://discord.com/invite/4ZZCqMRTwQ" // Replace with your Discord invite link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-lg text-purple-500 hover:underline"
-                  >
-                    <img
-                      src="image-assets/discord-icon-svgrepo-com.svg" // Replace with the path to your Discord icon
-                      alt="Discord"
-                      className="w-8 h-8 mr-2"
-                    />
-                    Join our Discord Server
-                  </a>
+                    src="/image-assets/LinkedIn_icon.svg"
+                    alt="LinkedIn"
+                    className="w-4 h-4"
+                  />
+                  LinkedIn
+                </a>
               </div>
+            ))}
+          </div>
         </div>
+      </div>
 
+      {/* Social links */}
+      <div className="px-6 py-12 text-center" style={{ borderTop: "1px solid var(--border)" }}>
+        <h2
+          className="text-2xl font-normal mb-8"
+          style={{ fontFamily: "var(--font-jqkas-wild)", color: "var(--primary)" }}
+        >
+          Connect With Us
+        </h2>
+        <div className="flex justify-center gap-6 flex-wrap">
+          <a
+            href="https://www.instagram.com/gto_illini/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg transition-all duration-150 hover:opacity-80"
+            style={{
+              border: "1px solid var(--border)",
+              color: "var(--foreground)",
+              fontFamily: "var(--font-geist-sans)",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+            }}
+          >
+            <img src="/image-assets/Instagram_logo_2016.svg" alt="Instagram" className="w-5 h-5" />
+            Follow on Instagram
+          </a>
+          <a
+            href="https://discord.com/invite/4ZZCqMRTwQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg transition-all duration-150 hover:opacity-80"
+            style={{
+              border: "1px solid var(--border)",
+              color: "var(--foreground)",
+              fontFamily: "var(--font-geist-sans)",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+            }}
+          >
+            <img
+              src="image-assets/discord-icon-svgrepo-com.svg"
+              alt="Discord"
+              className="w-5 h-5"
+            />
+            Join our Discord
+          </a>
+        </div>
+      </div>
     </main>
   );
 }
