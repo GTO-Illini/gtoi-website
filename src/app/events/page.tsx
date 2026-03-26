@@ -135,12 +135,6 @@ export default function Events() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
-      {/* Page header */}
-      <div className="px-6 py-10 text-center" style={{ backgroundColor: "var(--primary)" }}>
-        <h1 className="text-5xl md:text-6xl font-normal text-white" style={{ fontFamily: "var(--font-jqkas-wild)" }}>
-          Our Events
-        </h1>
-      </div>
 
       <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 max-w-screen-xl mx-auto py-6">
       <div className="flex items-center justify-between mb-4">

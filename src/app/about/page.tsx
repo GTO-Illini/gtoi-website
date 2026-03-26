@@ -55,24 +55,6 @@ export default function About() {
       className="min-h-screen"
       style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
     >
-      {/* Page header */}
-      <div
-        className="px-6 py-14 text-center"
-        style={{ backgroundColor: "var(--primary)" }}
-      >
-        <h1
-          className="text-5xl md:text-6xl font-normal text-white mb-3"
-          style={{ fontFamily: "var(--font-jqkas-wild)" }}
-        >
-          About Us
-        </h1>
-        <p
-          className="text-base md:text-lg max-w-xl mx-auto"
-          style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-geist-sans)" }}
-        >
-          Game Theory Optimal poker at the University of Illinois
-        </p>
-      </div>
 
       {/* Pillars */}
       <div className="max-w-5xl mx-auto px-6 py-14">

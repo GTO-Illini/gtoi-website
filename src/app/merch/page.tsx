@@ -21,21 +21,6 @@ export default function Merch() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
-      {/* Page header */}
-      <div className="px-6 py-10 text-center" style={{ backgroundColor: "var(--primary)" }}>
-        <h1
-          className="text-5xl md:text-6xl font-normal text-white mb-2"
-          style={{ fontFamily: "var(--font-jqkas-wild)" }}
-        >
-          Merchandise
-        </h1>
-        <p
-          className="text-base"
-          style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-geist-sans)" }}
-        >
-          GTO Illini merchandise purchase form will be available here soon.
-        </p>
-      </div>
 
       {/* Product grid */}
       <div className="max-w-4xl mx-auto px-6 py-14">

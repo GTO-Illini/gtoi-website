@@ -1,21 +1,6 @@
 export default function Tools() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
-      {/* Page header */}
-      <div className="px-6 py-10 text-center" style={{ backgroundColor: "var(--primary)" }}>
-        <h1
-          className="text-5xl md:text-6xl font-normal text-white mb-2"
-          style={{ fontFamily: "var(--font-jqkas-wild)" }}
-        >
-          Tools
-        </h1>
-        <p
-          className="text-base"
-          style={{ color: "rgba(255,255,255,0.75)", fontFamily: "var(--font-geist-sans)" }}
-        >
-          Resources to sharpen your poker game
-        </p>
-      </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
         {/* Poker Solver teaser */}
