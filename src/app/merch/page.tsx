@@ -51,7 +51,7 @@ export default function Merch() {
                     fontSize: 10, letterSpacing: '.12em',
                     textTransform: 'uppercase', color: 'var(--muted)',
                   }}>
-                    // Item
+                    {'// Item'}
                   </div>
                   <h4 style={{ marginTop: 6 }}>{item.name}</h4>
                   <p style={{

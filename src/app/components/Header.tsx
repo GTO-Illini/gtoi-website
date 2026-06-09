@@ -13,7 +13,7 @@ const Header = () => {
           />
           <div className={styles.brandWords}>
             <span className={styles.brandName}>GTO ILLINI</span>
-            <span className={styles.brandTag}>// Game Theory Optimal @ UIUC</span>
+            <span className={styles.brandTag}>{'// Game Theory Optimal @ UIUC'}</span>
           </div>
         </Link>
         <nav>
