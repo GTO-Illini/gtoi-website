@@ -2,83 +2,141 @@ import { leadership } from "@/lib/data/leadership";
 
 export default function About() {
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">About Us</h1>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold">Lectures</h2>
-        <p className="mt-2">GTO Illini presents regular lectures on a variety of poker topics, ranging from the basics to deep dives into advanced concepts. Check out our events page to make sure you don&apos;t miss any, and our resources page to take a look at past lectures.</p>
-      </div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold">Development</h2>
-        <p className="mt-2">To make poker learning as accessible as possible, GTO Illini is constantly developing new poker learning software for members to make use of. Check out our resources page to start using our tools and upping your game!</p>
-      </div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold">Competitions</h2>
-        <p className="mt-2">Poker is difficult to study practically without experience, so we hold regular online competitions to sharpen your knowledge and test your skills!</p>
-      </div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold">Leadership</h2>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 mt-4">
-          {leadership.map((leader, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
-              <img
-                src={leader.image}
-                alt={leader.name}
-                loading="lazy"
-                width="800"
-                height="800"
-                decoding="async"
-                className="aspect-square w-full max-w-56 max-h-56 object-cover rounded-full mb-2"
-              />
-              <h3 className="text-xl font-bold">{leader.title}</h3>
-              <p className="text-l font-bold">{leader.name}</p>
-              <a
-                href={leader.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 mt-2 text-blue-500 hover:underline"
-              >
-                <img
-                  src="/image-assets/LinkedIn_icon.svg"
-                  alt="LinkedIn"
-                  className="w-6 h-6"
-                />
-                Connect on LinkedIn
-              </a>
+    <main>
+
+      {/* ===== PAGE HEADER ===== */}
+      <header style={{
+        background: 'var(--felt)', color: 'var(--on-navy)',
+        padding: 'clamp(40px, 6vw, 72px) 0',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div aria-hidden style={{
+          position: 'absolute', right: -30, bottom: -90,
+          fontSize: 340, lineHeight: 1, color: '#fff', opacity: .045,
+          pointerEvents: 'none', userSelect: 'none',
+        }}>♠</div>
+        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
+          <span className="eyebrow on-navy">Who we are</span>
+          <h1 style={{
+            fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
+            color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
+          }}>
+            About <span className="accent">GTO Illini</span>
+          </h1>
+        </div>
+      </header>
+
+      {/* ===== PROGRAMS ===== */}
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="num">01 — Programs</div>
+            <h2>What <span className="accent">we do.</span></h2>
+          </div>
+          <div className="card-grid c3" style={{ marginTop: 44 }}>
+            <div className="card hoverable" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
+              <span className="tag"><span className="dot" />Lecture · Weekly</span>
+              <h4>GTO Theory</h4>
+              <p>
+                Regular lectures on a variety of poker topics, ranging from the basics
+                to deep dives into advanced concepts. Check our events page so you
+                don&apos;t miss any.
+              </p>
+              <a className="btn ghost" href="/events" style={{ marginTop: 'auto' }}>See schedule</a>
             </div>
-          ))}
+            <div className="card hoverable" style={{ '--c': 'var(--ace)' } as React.CSSProperties}>
+              <span className="tag"><span className="dot" />Tools · Always on</span>
+              <h4>Development</h4>
+              <p>
+                We constantly develop new poker learning software to make studying
+                as accessible as possible. Check out the resources page to start
+                using our tools.
+              </p>
+              <a className="btn ghost" href="/tools" style={{ marginTop: 'auto' }}>View tools</a>
+            </div>
+            <div className="card hoverable" style={{ '--c': 'var(--queen)' } as React.CSSProperties}>
+              <span className="tag"><span className="dot" />Competition · Regular</span>
+              <h4>Competitions</h4>
+              <p>
+                Poker is difficult to study without practical experience, so we hold
+                regular online competitions to sharpen your knowledge and test
+                your skills.
+              </p>
+              <a className="btn ghost" href="/events" style={{ marginTop: 'auto' }}>See events</a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div className="flex flex-col items-center mt-4 space-y-4">
-          <a
-            href="https://www.instagram.com/gto_illini/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:underline"
-          >
-            <img
-              src="/image-assets/Instagram_logo_2016.svg"
-              alt="Instagram"
-              className="h-8 w-8 mr-2"
-            />
-            Follow us on Instagram!
-          </a>
-          <a
-            href="https://discord.com/invite/4ZZCqMRTwQ"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-lg text-purple-500 hover:underline"
-          >
-            <img
-              src="image-assets/discord-icon-svgrepo-com.svg"
-              alt="Discord"
-              className="w-8 h-8 mr-2"
-            />
-            Join our Discord Server
-          </a>
+      </section>
+
+      {/* ===== LEADERSHIP ===== */}
+      <section className="section navy tight" style={{ position: 'relative' }}>
+        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="section-head">
+            <div className="num">02 — Team</div>
+            <h2>The <span className="accent">leadership.</span></h2>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+            gap: 18,
+            marginTop: 44,
+          }}>
+            {leadership.map((leader, index) => (
+              <div
+                key={index}
+                className="team-card"
+                style={{ '--c': 'var(--orange)' } as React.CSSProperties}
+              >
+                <div className="photo">
+                  <img src={leader.image} alt={leader.name} />
+                </div>
+                <div className="meta">
+                  <div className="role">{leader.title}</div>
+                  <div className="nm">{leader.name}</div>
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social"
+                  >
+                    <img src="/image-assets/LinkedIn_icon.svg" alt="" />
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ===== CONNECT ===== */}
+      <section className="section tight">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="num">03 — Connect</div>
+            <h2>Find us <span className="accent">online.</span></h2>
+          </div>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 36 }}>
+            <a
+              className="btn orange"
+              href="https://www.instagram.com/gto_illini/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+            <a
+              className="btn"
+              href="https://discord.com/invite/4ZZCqMRTwQ"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discord
+            </a>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

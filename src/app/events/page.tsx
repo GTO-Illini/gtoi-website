@@ -30,17 +30,14 @@ export default function Events() {
     const load = async () => {
       const prevDate = new Date(displayDate.getFullYear(), displayDate.getMonth() - 1);
       const nextDate = new Date(displayDate.getFullYear(), displayDate.getMonth() + 1);
-
       const [prev, curr, next] = await Promise.all([
         fetchMonthEvents(prevDate),
         fetchMonthEvents(displayDate),
         fetchMonthEvents(nextDate),
       ]);
-
       setPrefetchedMonthData({ prev, curr, next });
       setMonthData(curr);
     };
-
     load();
   }, [displayDate]);
 
@@ -48,83 +45,125 @@ export default function Events() {
   const totalDays = getDaysInDisplayMonth(displayDate);
 
   return (
-    <main className="min-h-screen px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 max-w-screen-xl mx-auto">
-      <h1 className="p-4 text-4xl md:text-5xl lg:text-6xl text-black" style={{ fontFamily: "var(--font-jqkas-wild), sans-serif" }}>Our Events</h1>
+    <main>
 
-      <div className="grid grid-cols-2">
-        <h3 className="pl-4 text-xl md:text-2xl lg:text-3xl text-black">
-          {displayDate.toLocaleString("default", { month: "long" })} {displayDate.getFullYear()}
-        </h3>
-        <div className="flex space-x-2">
-          <button
-            onClick={() => {
-              setMonthData(prefetchedMonthData.prev);
-              setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
-            }}
-            className={styles.arrow}
-          >
-            {"<"}
-          </button>
-          <button
-            onClick={() => {
-              setMonthData(prefetchedMonthData.next);
-              setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
-            }}
-            className={styles.arrow}
-          >
-            {">"}
-          </button>
+      {/* ===== PAGE HEADER ===== */}
+      <header style={{
+        background: 'var(--felt)', color: 'var(--on-navy)',
+        padding: 'clamp(40px, 6vw, 72px) 0',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div aria-hidden style={{
+          position: 'absolute', right: -30, bottom: -90,
+          fontSize: 340, lineHeight: 1, color: '#fff', opacity: .045,
+          pointerEvents: 'none', userSelect: 'none',
+        }}>♠</div>
+        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
+          <span className="eyebrow on-navy">Schedule</span>
+          <h1 style={{
+            fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
+            color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
+          }}>
+            Our <span className="accent">Events</span>
+          </h1>
         </div>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2 p-4">
-          <div className={styles.calendarHeader}>
-            {Array.from({ length: 7 }, (_, i) => (
-              <div className={styles.day} key={i}>
-                {new Date(1983, 0, 2 + i).toLocaleDateString("default", { weekday: "short" })}
-              </div>
-            ))}
+      {/* ===== CALENDAR ===== */}
+      <section className="section tight">
+        <div className="wrap">
+
+          {/* month nav */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28 }}>
+            <button
+              className={styles.arrow}
+              onClick={() => {
+                setMonthData(prefetchedMonthData.prev);
+                setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
+              }}
+            >{"<"}</button>
+            <h2 style={{
+              fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 500,
+              letterSpacing: '-.01em', color: 'var(--ink)', margin: 0,
+            }}>
+              {displayDate.toLocaleString("default", { month: "long" })}{" "}
+              {displayDate.getFullYear()}
+            </h2>
+            <button
+              className={styles.arrow}
+              onClick={() => {
+                setMonthData(prefetchedMonthData.next);
+                setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
+              }}
+            >{">"}</button>
           </div>
-          <div className={styles.calendar}>
-            {Array.from({ length: 42 }, (_, index) => (
-              <div className={styles.calendarCell} key={index}>
-                {index >= offset && index - offset + 1 <= totalDays && (
-                  <>
-                    <div className={styles.calendarCellNumber}>
-                      {String(index - offset + 1).padStart(2, "0")}
-                    </div>
-                    {monthData && (index - offset + 1) in monthData &&
-                      monthData[index - offset + 1].map((entry, i) => (
-                        <div
-                          onClick={() => setSelectedEvent(entry)}
-                          className={styles.calendarEvent}
-                          key={i}
-                        >
-                          {entry.summary}
+
+          <div className="calendar-layout">
+            {/* calendar grid */}
+            <div>
+              <div className={styles.calendarHeader}>
+                {Array.from({ length: 7 }, (_, i) => (
+                  <div className={styles.day} key={i}>
+                    {new Date(1983, 0, 2 + i).toLocaleDateString("default", { weekday: "short" })}
+                  </div>
+                ))}
+              </div>
+              <div className={styles.calendar}>
+                {Array.from({ length: 42 }, (_, index) => (
+                  <div className={styles.calendarCell} key={index}>
+                    {index >= offset && index - offset + 1 <= totalDays && (
+                      <>
+                        <div className={styles.calendarCellNumber}>
+                          {String(index - offset + 1).padStart(2, "0")}
                         </div>
-                      ))}
-                  </>
-                )}
+                        {monthData && (index - offset + 1) in monthData &&
+                          monthData[index - offset + 1].map((entry, i) => (
+                            <div
+                              onClick={() => setSelectedEvent(entry)}
+                              className={styles.calendarEvent}
+                              key={i}
+                            >
+                              {entry.summary}
+                            </div>
+                          ))}
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="col-span-1 p-4">
-          <div className={styles.eventInfoHeader}>Event Information</div>
-          {selectedEvent === null && <div>Click on an event to see more details!</div>}
-          {selectedEvent !== null && (
-            <div className={styles.eventInfoContainer}>
-              <div className={styles.eventInfoTitle}>{selectedEvent.summary}</div>
-              <div className={styles.eventInfoSubtitle}>
-                Location: {selectedEvent.location ? selectedEvent.location.split(",")[0] : "TBD"}
-              </div>
-              <div className={styles.eventInfoText}>{selectedEvent.description}</div>
             </div>
-          )}
+
+            {/* event detail panel */}
+            <div>
+              <div className={styles.eventInfoHeader}>Event Info</div>
+              {selectedEvent === null && (
+                <p style={{
+                  fontSize: 13,
+                  color: 'var(--muted)',
+                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  letterSpacing: '.06em',
+                  textTransform: 'uppercase',
+                }}>
+                  Click an event to see details.
+                </p>
+              )}
+              {selectedEvent !== null && (
+                <div className={styles.eventInfoContainer}>
+                  <div className={styles.eventInfoTitle}>{selectedEvent.summary}</div>
+                  <div className={styles.eventInfoSubtitle}>
+                    {selectedEvent.location
+                      ? selectedEvent.location.split(",")[0]
+                      : "Location TBD"}
+                  </div>
+                  <div className={styles.eventInfoText}>{selectedEvent.description}</div>
+                </div>
+              )}
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
+
     </main>
   );
 }

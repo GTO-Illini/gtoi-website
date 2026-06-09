@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
+  display: "swap",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
 });
+
 const jqkasWild = localFont({
   src: "./fonts/JqkasWild.ttf",
   variable: "--font-jqkas-wild",
@@ -20,7 +25,7 @@ const jqkasWild = localFont({
 
 export const metadata: Metadata = {
   title: "GTO Illini",
-  description: "Game Theory Optimal at the University of Illinois"
+  description: "Game Theory Optimal at the University of Illinois",
 };
 
 export default function RootLayout({
@@ -29,7 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${jqkasWild.variable}`}>
+    <html
+      lang="en"
+      className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} ${jqkasWild.variable}`}
+    >
       <body>
         <Header />
         {children}

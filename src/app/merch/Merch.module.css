@@ -1,9 +1,9 @@
 .merchImage {
   object-fit: contain;
+  width: 100%;
   height: auto;
-  max-height: 300px;
-  width: auto;
-  flex-shrink: 0;
-  border: 2px solid black;
-  box-sizing: border-box;
+  max-height: 260px;
+  border-radius: 3px;
+  background: var(--bg-2);
+  padding: 12px;
 }
