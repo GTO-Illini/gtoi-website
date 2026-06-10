@@ -1,3 +1,5 @@
+import TournamentAccordion from './TournamentAccordion';
+
 export default function Events() {
   return (
     <main>
@@ -59,44 +61,7 @@ export default function Events() {
             The big tournaments across the fall and spring terms.
           </p>
 
-          <div style={{ marginTop: 40 }}>
-            <div className="tl-row">
-              <div className="tl-date"><b>OCT</b><span>Fall</span></div>
-              <div className="tl-main">
-                <div className="kind">1.2.1 · Queen&apos;s Full</div>
-                <h4>Queen&apos;s Full Tournament</h4>
-                <p>Mid-season open tournament.</p>
-              </div>
-              <div className="tl-tag">Sponsorable</div>
-            </div>
-            <div className="tl-row">
-              <div className="tl-date"><b>NOV</b><span>Fall</span></div>
-              <div className="tl-main">
-                <div className="kind">1.2.3 · Classic</div>
-                <h4>GTO Illini Fall Poker Classic</h4>
-                <p>Flagship fall championship.</p>
-              </div>
-              <div className="tl-tag">Title event</div>
-            </div>
-            <div className="tl-row">
-              <div className="tl-date"><b>MAR</b><span>Spring</span></div>
-              <div className="tl-main">
-                <div className="kind">1.2.2 · Tag-Team</div>
-                <h4>Tag-Team Tournament</h4>
-                <p>Partners format, fan favorite.</p>
-              </div>
-              <div className="tl-tag">Sponsorable</div>
-            </div>
-            <div className="tl-row">
-              <div className="tl-date"><b>APR</b><span>Spring</span></div>
-              <div className="tl-main">
-                <div className="kind">1.2.4 · Classic</div>
-                <h4>GTO Illini Spring Poker Classic</h4>
-                <p>Season-ending championship.</p>
-              </div>
-              <div className="tl-tag">Title event</div>
-            </div>
-          </div>
+          <TournamentAccordion />
         </div>
       </section>
 
