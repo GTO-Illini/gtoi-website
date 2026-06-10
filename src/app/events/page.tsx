@@ -1,49 +1,4 @@
-"use client"
-
-import { useState, useEffect } from "react";
-import styles from "./Events.module.css";
-import {
-  CalendarEvent,
-  EventData,
-  fetchMonthEvents,
-  getStartDateOffset,
-  getDaysInDisplayMonth,
-} from "@/lib/calendar";
-
-interface MonthData {
-  prev: EventData | null;
-  curr: EventData | null;
-  next: EventData | null;
-}
-
 export default function Events() {
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
-  const [displayDate, setDisplayDate] = useState(new Date());
-  const [prefetchedMonthData, setPrefetchedMonthData] = useState<MonthData>({
-    prev: null,
-    curr: null,
-    next: null,
-  });
-  const [monthData, setMonthData] = useState<EventData | null>(null);
-
-  useEffect(() => {
-    const load = async () => {
-      const prevDate = new Date(displayDate.getFullYear(), displayDate.getMonth() - 1);
-      const nextDate = new Date(displayDate.getFullYear(), displayDate.getMonth() + 1);
-      const [prev, curr, next] = await Promise.all([
-        fetchMonthEvents(prevDate),
-        fetchMonthEvents(displayDate),
-        fetchMonthEvents(nextDate),
-      ]);
-      setPrefetchedMonthData({ prev, curr, next });
-      setMonthData(curr);
-    };
-    load();
-  }, [displayDate]);
-
-  const offset = getStartDateOffset(displayDate);
-  const totalDays = getDaysInDisplayMonth(displayDate);
-
   return (
     <main>
 
@@ -64,105 +19,85 @@ export default function Events() {
             fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
             color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
           }}>
-            Our <span className="accent">Events</span>
+            The <span className="accent">season.</span>
           </h1>
         </div>
       </header>
 
-      {/* ===== CALENDAR ===== */}
-      <section className="section tight">
+      {/* ===== WEEKLY RECURRING ===== */}
+      <section className="section">
         <div className="wrap">
-
-          {/* month nav */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28 }}>
-            <button
-              className={styles.arrow}
-              onClick={() => {
-                setMonthData(prefetchedMonthData.prev);
-                setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() - 1));
-              }}
-            >{"<"}</button>
-            <h2 style={{
-              fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 500,
-              letterSpacing: '-.01em', color: 'var(--ink)', margin: 0,
-            }}>
-              {displayDate.toLocaleString("default", { month: "long" })}{" "}
-              {displayDate.getFullYear()}
-            </h2>
-            <button
-              className={styles.arrow}
-              onClick={() => {
-                setMonthData(prefetchedMonthData.next);
-                setDisplayDate(new Date(displayDate.getFullYear(), displayDate.getMonth() + 1));
-              }}
-            >{">"}</button>
+          <div className="section-head">
+            <div className="num">01 — Recurring</div>
+            <h2>Every <span className="accent">week.</span></h2>
           </div>
-
-          <div className="calendar-layout">
-            {/* calendar grid */}
-            <div>
-              <div className={styles.calendarHeader}>
-                {Array.from({ length: 7 }, (_, i) => (
-                  <div className={styles.day} key={i}>
-                    {new Date(1983, 0, 2 + i).toLocaleDateString("default", { weekday: "short" })}
-                  </div>
-                ))}
-              </div>
-              <div className={styles.calendar}>
-                {Array.from({ length: 42 }, (_, index) => (
-                  <div className={styles.calendarCell} key={index}>
-                    {index >= offset && index - offset + 1 <= totalDays && (
-                      <>
-                        <div className={styles.calendarCellNumber}>
-                          {String(index - offset + 1).padStart(2, "0")}
-                        </div>
-                        {monthData && (index - offset + 1) in monthData &&
-                          monthData[index - offset + 1].map((entry, i) => (
-                            <div
-                              onClick={() => setSelectedEvent(entry)}
-                              className={styles.calendarEvent}
-                              key={i}
-                            >
-                              {entry.summary}
-                            </div>
-                          ))}
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
+          <div className="weekly-grid" style={{ marginTop: 40 }}>
+            <div className="weekly" style={{ '--c': 'var(--king)' } as React.CSSProperties}>
+              <div className="id">1.1.1 · Theory · Weekly</div>
+              <h4>Thursday Lectures</h4>
+              <div className="when">Thu · Solver labs &amp; GTO theory · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
             </div>
-
-            {/* event detail panel */}
-            <div>
-              <div className={styles.eventInfoHeader}>Event Info</div>
-              {selectedEvent === null && (
-                <p style={{
-                  fontSize: 13,
-                  color: 'var(--muted)',
-                  fontFamily: 'var(--font-ibm-plex-mono)',
-                  letterSpacing: '.06em',
-                  textTransform: 'uppercase',
-                }}>
-                  Click an event to see details.
-                </p>
-              )}
-              {selectedEvent !== null && (
-                <div className={styles.eventInfoContainer}>
-                  <div className={styles.eventInfoTitle}>{selectedEvent.summary}</div>
-                  <div className={styles.eventInfoSubtitle}>
-                    {selectedEvent.location
-                      ? selectedEvent.location.split(",")[0]
-                      : "Location TBD"}
-                  </div>
-                  <div className={styles.eventInfoText}>{selectedEvent.description}</div>
-                </div>
-              )}
+            <div className="weekly" style={{ '--c': 'var(--joker)' } as React.CSSProperties}>
+              <div className="id">1.1.2 · Tournament · Weekly</div>
+              <h4>Tuesday Tournaments</h4>
+              <div className="when">Tue · Live in-person play · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
             </div>
           </div>
-
         </div>
       </section>
+
+      {/* ===== MARQUEE EVENTS ===== */}
+      <section className="section navy">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="num">02 — Marquee</div>
+            <h2>Tentpole <span className="accent">events.</span></h2>
+          </div>
+          <p className="lede">
+            The big ones — title-sponsorable tournaments across the fall and spring terms.
+          </p>
+
+          <div style={{ marginTop: 40 }}>
+            <div className="tl-row">
+              <div className="tl-date"><b>OCT</b><span>Fall</span></div>
+              <div className="tl-main">
+                <div className="kind">1.2.1 · Queen's Full</div>
+                <h4>Queen's Full Tournament</h4>
+                <p>Mid-season open tournament.</p>
+              </div>
+              <div className="tl-tag">Sponsorable</div>
+            </div>
+            <div className="tl-row">
+              <div className="tl-date"><b>NOV</b><span>Fall</span></div>
+              <div className="tl-main">
+                <div className="kind">1.2.3 · Classic</div>
+                <h4>GTO Illini Fall Poker Classic</h4>
+                <p>Flagship fall championship.</p>
+              </div>
+              <div className="tl-tag">Title event</div>
+            </div>
+            <div className="tl-row">
+              <div className="tl-date"><b>MAR</b><span>Spring</span></div>
+              <div className="tl-main">
+                <div className="kind">1.2.2 · Tag-Team</div>
+                <h4>Tag-Team Tournament</h4>
+                <p>Partners format, fan favorite.</p>
+              </div>
+              <div className="tl-tag">Sponsorable</div>
+            </div>
+            <div className="tl-row">
+              <div className="tl-date"><b>APR</b><span>Spring</span></div>
+              <div className="tl-main">
+                <div className="kind">1.2.4 · Classic</div>
+                <h4>GTO Illini Spring Poker Classic</h4>
+                <p>Season-ending championship.</p>
+              </div>
+              <div className="tl-tag">Title event</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
     </main>
   );
