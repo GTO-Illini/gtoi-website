@@ -52,15 +52,7 @@ export default function CompetitiveTeam() {
             season — earning the top regular-season seed and a finals appearance.
           </p>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, auto)',
-            gap: '0 36px',
-            width: 'fit-content',
-            marginTop: 40,
-            paddingTop: 28,
-            borderTop: '1px solid var(--on-navy-rule)',
-          }}>
+          <div className="hero-stats">
             {[
               { k: 'Regular-season seed', v: 'No. 1' },
               { k: 'Points',              v: '222'         },
