@@ -57,7 +57,14 @@ export default function Home() {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
             <a className="btn orange" href="/events">See events</a>
-            <a className="btn on-navy" href="/sponsor">Become a sponsor</a>
+            <a
+              className="btn on-navy"
+              href="https://discord.com/invite/4ZZCqMRTwQ"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join us
+            </a>
           </div>
         </div>
       </header>
@@ -168,31 +175,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== JOIN US ===== */}
-      <section className="section navy tight">
+      {/* ===== SPONSORS ===== */}
+      <section className="section navy">
         <div className="wrap">
           <div className="section-head">
-            <div className="num">04 — Community</div>
-            <h2>Join <span className="accent">us.</span></h2>
+            <div className="num">04 — Partners</div>
+            <h2>Our <span className="accent">sponsors.</span></h2>
           </div>
-          <p className="lede">No experience required. Show up, learn the game, and start climbing the leaderboard.</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 36 }}>
-            <a
-              className="btn orange"
-              href="https://discord.com/invite/4ZZCqMRTwQ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join our Discord
-            </a>
-            <a
-              className="btn on-navy"
-              href="https://www.instagram.com/gto_illini/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Follow on Instagram
-            </a>
+          <p className="lede">
+            GTO Illini partners with companies that want to reach 300+ analytical, technical
+            students at UIUC.
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>
+
+            {/* Tier 1 — Joker */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div className="tier" style={{ '--c': 'var(--joker)', width: '100%' } as React.CSSProperties}>
+                <div className="tier-id"><span>T-01 // Joker</span><span className="suit-mark">♦</span></div>
+                <div className="tier-name">Joker</div>
+                <div className="tier-kind">Title Partner</div>
+                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
+              </div>
+            </div>
+
+            {/* Tier 2 — Ace */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div className="tier" style={{ '--c': 'var(--ace)', width: '100%' } as React.CSSProperties}>
+                <div className="tier-id"><span>T-02 // Ace</span><span className="suit-mark">♠</span></div>
+                <div className="tier-name">Ace</div>
+                <div className="tier-kind">Premium Partner</div>
+                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
+              </div>
+            </div>
+
+            {/* Tier 3 — King */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div className="tier" style={{ '--c': 'var(--king)', width: '100%' } as React.CSSProperties}>
+                <div className="tier-id"><span>T-03 // King</span><span className="suit-mark">♣</span></div>
+                <div className="tier-name">King</div>
+                <div className="tier-kind">Standard Partner</div>
+                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
+              </div>
+            </div>
+
+            {/* Tier 4 — Queen */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div className="tier" style={{ '--c': 'var(--queen)', width: '100%' } as React.CSSProperties}>
+                <div className="tier-id"><span>T-04 // Queen</span><span className="suit-mark">♥</span></div>
+                <div className="tier-name">Queen</div>
+                <div className="tier-kind">Entry Partner</div>
+                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div style={{
+            marginTop: 52,
+            paddingTop: 36,
+            borderTop: '1px solid var(--on-navy-rule)',
+          }}>
+            <span className="eyebrow on-navy">Next step</span>
+            <h3 style={{
+              fontSize: 'clamp(24px, 3vw, 36px)',
+              color: '#fff',
+              fontWeight: 500,
+              letterSpacing: '-.015em',
+              marginTop: 14,
+            }}>
+              Ready to <span className="accent">partner?</span>
+            </h3>
+            <p style={{ color: 'var(--on-navy-2)', marginTop: 12, fontSize: 15 }}>
+              Contact{' '}
+              <a
+                href="mailto:corporate-outreach@gtoillini.com"
+                style={{ color: 'var(--orange)', textDecoration: 'underline' }}
+              >
+                corporate-outreach@gtoillini.com
+              </a>
+              {' '}for more details.
+            </p>
           </div>
         </div>
       </section>

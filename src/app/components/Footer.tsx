@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="foot-col">
             <h5>Explore</h5>
             <Link href="/events">Events</Link>
-            <Link href="/sponsor">Sponsor</Link>
+            <Link href="/competitive-team">Competitive Team</Link>
             <Link href="/tools">Tools</Link>
             <Link href="/merch">Merch</Link>
           </div>

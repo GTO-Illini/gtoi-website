@@ -18,11 +18,11 @@ const Header = () => {
         </Link>
         <nav>
           <ul className={styles.navLinks}>
+            <li><Link href="/" className={styles.link}>Home</Link></li>
             <li><Link href="/events" className={styles.link}>Events</Link></li>
             <li><Link href="/competitive-team" className={styles.link}>Competitive Team</Link></li>
             <li><Link href="/tools" className={styles.link}>Tools</Link></li>
             <li><Link href="/merch" className={styles.link}>Merch</Link></li>
-            <li><Link href="/sponsor" className={styles.link}>Sponsor</Link></li>
           </ul>
         </nav>
       </div>
