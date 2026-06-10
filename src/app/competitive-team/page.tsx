@@ -1,9 +1,9 @@
 const roster = [
-  { seat: '01', role: 'Captain', name: 'First Last', color: 'var(--orange)' },
-  { seat: '02', role: 'Player',  name: 'First Last', color: 'var(--felt)'   },
-  { seat: '03', role: 'Player',  name: 'First Last', color: 'var(--ace)'    },
-  { seat: '04', role: 'Player',  name: 'First Last', color: 'var(--queen)'  },
-  { seat: '05', role: 'Player',  name: 'First Last', color: 'var(--felt-2)' },
+  { seat: '01', role: 'Captain',   name: 'Patrick Smith',  year: '4th year',  image: '/image-assets/leadership_photos/Patrick.webp',  color: 'var(--orange)' },
+  { seat: '02', role: 'Player',    name: 'Gavin Wu',       year: 'PhD',        image: '/image-assets/leadership_photos/Gavin.webp',    color: 'var(--felt)'   },
+  { seat: '03', role: 'Player',    name: 'Nathan Natoli',  year: 'Graduated',  image: '/image-assets/leadership_photos/Nathan.webp',   color: 'var(--ace)'    },
+  { seat: '04', role: 'Player',    name: 'Eric Song',      year: '2nd year',   image: '/image-assets/leadership_photos/eric.png',      color: 'var(--queen)'  },
+  { seat: '05', role: 'Player',    name: 'Dylan Wu',       year: 'Graduated',  image: '/image-assets/leadership_photos/dylan.jpg',     color: 'var(--felt-2)' },
 ];
 
 export default function CompetitiveTeam() {
@@ -39,7 +39,7 @@ export default function CompetitiveTeam() {
             fontWeight: 500,
             letterSpacing: '-.02em',
           }}>
-            The competitive <span className="accent">team.</span>
+            The Competitive <span className="accent">Team</span>
           </h1>
           <p style={{
             fontSize: 'clamp(15px, 2vw, 18px)',
@@ -48,7 +48,7 @@ export default function CompetitiveTeam() {
             color: 'var(--on-navy-2)',
             marginTop: 20,
           }}>
-            The five players who carried GTO Illini&apos;s colors through our debut intercollegiate
+            The roster who carried GTO Illini&apos;s colors through our debut intercollegiate
             season — earning the top regular-season seed and a finals appearance.
           </p>
 
@@ -88,7 +88,7 @@ export default function CompetitiveTeam() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">01 — Last Season</div>
-            <h2>How we <span className="accent">played.</span></h2>
+            <h2>How We <span className="accent">Played</span></h2>
           </div>
           <p className="lede">
             A debut campaign in the IPA Challengers Division: first across the regular season,
@@ -152,7 +152,7 @@ export default function CompetitiveTeam() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">02 — Roster</div>
-            <h2>Meet the <span className="accent">five.</span></h2>
+            <h2>Meet The <span className="accent">Team</span></h2>
           </div>
           <div style={{
             display: 'grid',
@@ -160,13 +160,15 @@ export default function CompetitiveTeam() {
             gap: 16,
             marginTop: 44,
           }}>
-            {roster.map(({ seat, role, name, color }) => (
+            {roster.map(({ seat, role, name, year, image, color }) => (
               <div
                 key={seat}
                 className="team-card"
                 style={{ '--c': color, color: 'var(--ink)' } as React.CSSProperties}
               >
-                <div className="photo" />
+                <div className="photo">
+                  <img src={image} alt={name} />
+                </div>
                 <div className="meta">
                   <div style={{
                     fontFamily: 'var(--font-ibm-plex-mono)',
@@ -178,6 +180,7 @@ export default function CompetitiveTeam() {
                   }}>Seat {seat}</div>
                   <div className="role">{role}</div>
                   <div className="nm">{name}</div>
+                  <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{year}</div>
                 </div>
               </div>
             ))}
@@ -190,11 +193,12 @@ export default function CompetitiveTeam() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">03 — Join</div>
-            <h2>Interested in <span className="accent">joining?</span></h2>
+            <h2>Interested In <span className="accent">Joining?</span></h2>
           </div>
           <p className="lede">
             We&apos;re always looking for sharp, competitive players to grow the roster.
-            No experience required — bring the willingness to study, and we&apos;ll handle the rest.
+            No experience required — just the willingness to study!
+            DM Patrick on discord for more info.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 32 }}>
             <a

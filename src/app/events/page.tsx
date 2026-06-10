@@ -14,12 +14,12 @@ export default function Events() {
           pointerEvents: 'none', userSelect: 'none',
         }}>♠</div>
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <span className="eyebrow on-navy">Schedule</span>
+          <span className="eyebrow on-navy">Events</span>
           <h1 style={{
             fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
             color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
           }}>
-            The <span className="accent">season.</span>
+            The <span className="accent">Schedule</span>
           </h1>
         </div>
       </header>
@@ -29,19 +29,21 @@ export default function Events() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">01 — Recurring</div>
-            <h2>Every <span className="accent">week.</span></h2>
+            <h2>Every <span className="accent">Week</span></h2>
           </div>
+          
           <div className="weekly-grid" style={{ marginTop: 40 }}>
-            <div className="weekly" style={{ '--c': 'var(--king)' } as React.CSSProperties}>
-              <div className="id">1.1.1 · Theory · Weekly</div>
-              <h4>Thursday Lectures</h4>
-              <div className="when">Thu · Solver labs &amp; GTO theory · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
-            </div>
             <div className="weekly" style={{ '--c': 'var(--joker)' } as React.CSSProperties}>
               <div className="id">1.1.2 · Tournament · Weekly</div>
               <h4>Tuesday Tournaments</h4>
               <div className="when">Tue · Live in-person play · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
             </div>
+            <div className="weekly" style={{ '--c': 'var(--king)' } as React.CSSProperties}>
+              <div className="id">1.1.1 · Theory · Weekly</div>
+              <h4>Thursday Lectures</h4>
+              <div className="when">Thu · Solver labs &amp; GTO theory · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
+            </div>
+            
           </div>
         </div>
       </section>
@@ -51,10 +53,10 @@ export default function Events() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">02 — Marquee</div>
-            <h2>Tentpole <span className="accent">events.</span></h2>
+            <h2>Major <span className="accent">Tournaments</span></h2>
           </div>
           <p className="lede">
-            The big ones — title-sponsorable tournaments across the fall and spring terms.
+            The big tournaments across the fall and spring terms.
           </p>
 
           <div style={{ marginTop: 40 }}>

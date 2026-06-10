@@ -74,7 +74,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">01 — The Organization</div>
-            <h2>Who <span className="accent">we are.</span></h2>
+            <h2>Who <span className="accent">We Are</span></h2>
           </div>
           <p className="lede">
             GTO Illini was first established to help curious students learn the deep and
@@ -107,7 +107,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">02 — Program</div>
-            <h2>How <span className="accent">we play.</span></h2>
+            <h2>How <span className="accent">We Play</span></h2>
           </div>
           <p className="lede">
             Study, practice, and compete. 
@@ -139,7 +139,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">03 — Leadership</div>
-            <h2>The <span className="accent">table.</span></h2>
+            <h2>The <span className="accent">Table</span></h2>
           </div>
           <div style={{
             display: 'grid',
@@ -180,7 +180,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">04 — Partners</div>
-            <h2>Our <span className="accent">sponsors.</span></h2>
+            <h2>Our <span className="accent">Sponsors</span></h2>
           </div>
           <p className="lede">
             GTO Illini partners with companies that want to reach 300+ analytical, technical

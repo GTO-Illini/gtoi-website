@@ -29,7 +29,7 @@ export default function Tools() {
         <div className="wrap">
           <div className="section-head">
             <div className="num">01 — Tools</div>
-            <h2>Poker <span className="accent">resources.</span></h2>
+            <h2>Poker <span className="accent">Resources</span></h2>
           </div>
           <div className="card-grid c2" style={{ marginTop: 44 }}>
 
