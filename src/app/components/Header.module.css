@@ -1,106 +1,86 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 2rem;
-  background-color: #143560;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 80px;
-  font-family: var(--font-jqkas-wild);
-  min-width: min-content;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: var(--felt);
+  border-bottom: 1px solid var(--on-navy-rule);
 }
 
-.logo {
+.inner {
+  height: 100%;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  gap: 28px;
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
 }
 
-.logoLink {
+.brand {
   display: flex;
   align-items: center;
+  gap: 11px;
   text-decoration: none;
-  gap: 1rem;
-  white-space: nowrap;
+  margin-right: auto;
 }
 
-.logoImage {
+.brandImg {
+  width: 38px;
+  height: 38px;
   object-fit: contain;
-  height: 70px;
-  width: auto;
   flex-shrink: 0;
 }
 
-.logoText {
-  font-size: 4rem;
-  font-weight: normal;
+.brandWords {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1;
+}
+
+.brandName {
+  font-size: 14px;
+  letter-spacing: .18em;
+  font-weight: 700;
   color: #fff;
 }
 
-.nav {
-  display: flex;
-  gap: 1.5rem;
-  margin-left: 2rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+.brandTag {
+  font-family: var(--font-ibm-plex-mono, 'IBM Plex Mono'), monospace;
+  font-size: 8.5px;
+  letter-spacing: .16em;
+  color: var(--on-navy-2);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-.nav::-webkit-scrollbar {
-  display: none;
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .link {
+  font-family: var(--font-ibm-plex-mono, 'IBM Plex Mono'), monospace;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--on-navy-2);
   text-decoration: none;
-  color: #fff;
-  font-weight: normal;
-  font-size: 2.5rem;
-  padding: 0.5rem 1.5rem;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: 3px;
+  position: relative;
+  transition: color .15s ease;
 }
+.link:hover { color: #fff; }
 
-.link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.link:active {
-  background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 1024px) {
-  .logoText {
-    font-size: 3rem;
-  }
-  
-  .link {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    padding: 0.5rem 1rem;
-  }
-  
-  .logoText {
-    font-size: 2.5rem;
-  }
-  
-  .link {
-    font-size: 1.8rem;
-    padding: 0.4rem 1rem;
-  }
-  
-  .nav {
-    gap: 1rem;
-  }
+@media (max-width: 720px) {
+  .brandTag { display: none; }
+  .link { font-size: 11px; padding: 8px 8px; letter-spacing: .06em; }
 }
