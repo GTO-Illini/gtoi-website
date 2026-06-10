@@ -10,7 +10,7 @@ export default function Footer() {
               <img src="/image-assets/GTOIlliniLogoSuits.png" alt="GTO Illini" />
               <div>
                 <span className="name">GTO ILLINI</span>
-                <span className="tag">// Game Theory Optimal @ UIUC</span>
+                <span className="tag">{"// Game Theory Optimal @ UIUC"}</span>
               </div>
             </div>
             <p>The premier poker organization at the University of Illinois Urbana-Champaign.</p>

@@ -63,8 +63,8 @@ export default function Events() {
             <div className="tl-row">
               <div className="tl-date"><b>OCT</b><span>Fall</span></div>
               <div className="tl-main">
-                <div className="kind">1.2.1 · Queen's Full</div>
-                <h4>Queen's Full Tournament</h4>
+                <div className="kind">1.2.1 · Queen&apos;s Full</div>
+                <h4>Queen&apos;s Full Tournament</h4>
                 <p>Mid-season open tournament.</p>
               </div>
               <div className="tl-tag">Sponsorable</div>
