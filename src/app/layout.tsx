@@ -4,6 +4,7 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ScrollReveal from "./components/ScrollReveal";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
       className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} ${jqkasWild.variable}`}
     >
       <body>
+        <ScrollReveal />
         <Header />
         {children}
         <Footer />

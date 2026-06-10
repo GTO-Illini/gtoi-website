@@ -164,7 +164,7 @@ export default function TournamentAccordion() {
                       textTransform: 'uppercase',
                       color: 'var(--muted)',
                     }}>
-                      // Event Details
+                      {'// Event Details'}
                     </div>
                     {DETAILS.map(({ label, value }) => (
                       <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
