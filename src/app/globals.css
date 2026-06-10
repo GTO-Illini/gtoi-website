@@ -3,6 +3,28 @@
 @tailwind utilities;
 
 /* ============================================================
+   PAGE & SCROLL ANIMATIONS
+   ============================================================ */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: pageIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.will-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.did-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
    DESIGN TOKENS
    ============================================================ */
 :root {
@@ -46,7 +68,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--felt);
   color: var(--ink);
   font-family: var(--font-ibm-plex-sans, 'IBM Plex Sans'), system-ui, sans-serif;
   font-size: 16px;
@@ -79,6 +101,7 @@ p { margin: 0; }
 .section {
   padding-block: clamp(56px, 8vw, 104px);
   position: relative;
+  background: var(--bg);
 }
 .section.tight { padding-block: clamp(40px, 6vw, 72px); }
 

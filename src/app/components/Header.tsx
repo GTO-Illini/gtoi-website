@@ -6,6 +6,7 @@ import styles from './Header.module.css';
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/events', label: 'Events' },
+  { href: '/leaderboard', label: 'Leaderboard' },
   { href: '/competitive-team', label: 'Competitive Team' },
   { href: '/tools', label: 'Tools' },
   { href: '/merch', label: 'Merch' },

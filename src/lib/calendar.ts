@@ -28,7 +28,7 @@ export async function fetchMonthEvents(date: Date): Promise<EventData> {
   const year = String(date.getFullYear());
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const totalDays = getDaysInMonth(date);
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY;
+  const apiKey = process.env.GOOGLE_CALENDAR_API_KEY;
   const timeMin = `${year}-${month}-01T00:00:00-06:00`;
   const timeMax = `${year}-${month}-${totalDays}T23:59:59-06:00`;
 
