@@ -1,4 +1,5 @@
 import { leadership } from "@/lib/data/leadership";
+import { FadeIn, Reveal, Stagger, StaggerItem } from "./components/motion";
 
 export default function Home() {
   return (
@@ -10,13 +11,14 @@ export default function Home() {
         position: 'relative',
         overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', inset: 0 }}>
+        {/* Table is set first: background + suit watermarks ease in ahead of the text */}
+        <FadeIn y={0} duration={0.9} style={{ position: 'absolute', inset: 0 }}>
           <img
             src="/image-assets/landing-page-slideshow/kevin_champ.jpg"
             alt=""
             style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.15 }}
           />
-        </div>
+        </FadeIn>
         <div aria-hidden style={{
           position: 'absolute', left: -50, top: -120,
           fontSize: 420, lineHeight: 1, color: 'var(--orange)', opacity: 0.10,
@@ -32,39 +34,49 @@ export default function Home() {
           position: 'relative', zIndex: 2,
           paddingBlock: 'clamp(64px, 10vw, 128px)',
         }}>
-          <span className="eyebrow on-navy">Game Theory Optimal @ UIUC</span>
-          <h1 style={{
-            fontFamily: 'var(--font-jqkas-wild), sans-serif',
-            fontSize: 'clamp(52px, 8vw, 104px)',
-            lineHeight: .92,
-            letterSpacing: '-.03em',
-            fontWeight: 400,
-            marginTop: 22,
-            color: '#fff',
-          }}>
-            GTO Illini
-          </h1>
-          <p style={{
-            fontSize: 'clamp(16px, 2vw, 19px)',
-            lineHeight: 1.5,
-            maxWidth: 520,
-            color: 'var(--on-navy-2)',
-            marginTop: 26,
-            paddingLeft: 18,
-            borderLeft: '2px solid var(--orange)',
-          }}>
-            Poker at the University of Illinois
-          </p>
+          <FadeIn delay={0.05} y={14}>
+            <span className="eyebrow on-navy">Game Theory Optimal @ UIUC</span>
+          </FadeIn>
+          <FadeIn delay={0.12} y={18}>
+            <h1 style={{
+              fontFamily: 'var(--font-jqkas-wild), sans-serif',
+              fontSize: 'clamp(52px, 8vw, 104px)',
+              lineHeight: .92,
+              letterSpacing: '-.03em',
+              fontWeight: 400,
+              marginTop: 22,
+              color: '#fff',
+            }}>
+              GTO Illini
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.19} y={16}>
+            <p style={{
+              fontSize: 'clamp(16px, 2vw, 19px)',
+              lineHeight: 1.5,
+              maxWidth: 520,
+              color: 'var(--on-navy-2)',
+              marginTop: 26,
+              paddingLeft: 18,
+              borderLeft: '2px solid var(--orange)',
+            }}>
+              Poker at the University of Illinois
+            </p>
+          </FadeIn>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
-            <a className="btn orange" href="/events">See events</a>
-            <a
-              className="btn on-navy"
-              href="https://discord.com/invite/4ZZCqMRTwQ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join us
-            </a>
+            <FadeIn delay={0.26} y={12}>
+              <a className="btn orange" href="/events">See events</a>
+            </FadeIn>
+            <FadeIn delay={0.30} y={12}>
+              <a
+                className="btn on-navy"
+                href="https://discord.com/invite/4ZZCqMRTwQ"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join us
+              </a>
+            </FadeIn>
           </div>
         </div>
       </header>
@@ -72,83 +84,83 @@ export default function Home() {
       {/* ===== ABOUT ===== */}
       <section className="section">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">01 — The Organization</div>
-            <h2>Who <span className="accent">We Are</span></h2>
-          </div>
-          <p className="lede">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>01 — The Organization</StaggerItem>
+            <StaggerItem as="h2" y={16}>Who <span className="accent">We Are</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
             GTO Illini was first established to help curious students learn the deep and
             fascinating strategy that poker has to offer. Now we are defining the new
             standard in the college competitive poker scene.
-          </p>
+          </Reveal>
 
-          <div className="stat-grid" style={{ marginTop: 56 }}>
-            <div className="stat">
+          <Stagger className="stat-grid" stagger={0.04} style={{ marginTop: 56 }}>
+            <StaggerItem className="stat">
               <div className="k">Members</div>
               <div className="n">300<span className="u">+</span></div>
               <div className="d">Active members, and counting.</div>
-            </div>
-            <div className="stat">
+            </StaggerItem>
+            <StaggerItem className="stat">
               <div className="k">Composition</div>
               <div className="n">60<span className="u">%+</span></div>
               <div className="d">Studying CS, ECE, Math, Stats, and Finance.</div>
-            </div>
-            <div className="stat">
+            </StaggerItem>
+            <StaggerItem className="stat">
               <div className="k">Est.</div>
               <div className="n">2024</div>
               <div className="d">2 years running tournaments and theory sessions.</div>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
       {/* ===== WHAT WE DO ===== */}
       <section className="section navy">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">02 — Program</div>
-            <h2>How <span className="accent">We Play</span></h2>
-          </div>
-          <p className="lede">
-            Study, practice, and compete. 
-          </p>
-          <div className="card-grid c3" style={{ marginTop: 44 }}>
-            <div className="card hoverable" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>02 — Program</StaggerItem>
+            <StaggerItem as="h2" y={16}>How <span className="accent">We Play</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
+            Study, practice, and compete.
+          </Reveal>
+          <Stagger className="card-grid c3" stagger={0.06} style={{ marginTop: 44 }}>
+            <StaggerItem className="card hoverable" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Lecture · Weekly</span>
               <h4>GTO Theory</h4>
               <p>Curriculum-based lectures on ranges, equity, blockers, and solver-driven play.</p>
-            </div>
-            <div className="card hoverable" style={{ '--c': 'var(--ace)' } as React.CSSProperties}>
+            </StaggerItem>
+            <StaggerItem className="card hoverable" style={{ '--c': 'var(--ace)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Lab · Weekly</span>
               <h4>Live Tournaments</h4>
               <p>Weekly tournaments to put theory and skills to the test under real pressure.</p>
               <a className="btn ghost" href="/events" style={{ marginTop: 'auto' }}>See schedule</a>
-            </div>
-            <div className="card hoverable" style={{ '--c': 'var(--queen)' } as React.CSSProperties}>
+            </StaggerItem>
+            <StaggerItem className="card hoverable" style={{ '--c': 'var(--queen)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Competition · Monthly</span>
               <h4>Intercollegiate Play</h4>
               <p>Campus-wide events and competing in the Intercollegiate Poker League.</p>
               <a className="btn ghost" href="/events" style={{ marginTop: 'auto' }}>See events</a>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
       {/* ===== LEADERSHIP ===== */}
       <section className="section tight">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">03 — Leadership</div>
-            <h2>The <span className="accent">Table</span></h2>
-          </div>
-          <div style={{
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>03 — Leadership</StaggerItem>
+            <StaggerItem as="h2" y={16}>The <span className="accent">Table</span></StaggerItem>
+          </Stagger>
+          <Stagger stagger={0.05} style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
             gap: 18,
             marginTop: 44,
           }}>
             {leadership.map((leader, index) => (
-              <div
+              <StaggerItem
                 key={index}
                 className="team-card"
                 style={{ '--c': 'var(--orange)' } as React.CSSProperties}
@@ -169,69 +181,69 @@ export default function Home() {
                     LinkedIn
                   </a>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ===== SPONSORS ===== */}
       <section className="section navy">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">04 — Partners</div>
-            <h2>Our <span className="accent">Sponsors</span></h2>
-          </div>
-          <p className="lede">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>04 — Partners</StaggerItem>
+            <StaggerItem as="h2" y={16}>Our <span className="accent">Sponsors</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
             GTO Illini partners with companies that want to reach 300+ analytical, technical
             students at UIUC.
-          </p>
+          </Reveal>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>
+          <Stagger stagger={0.07} style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>
 
             {/* Tier 1 — Joker */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
               <div className="tier" style={{ '--c': 'var(--joker)', width: '100%' } as React.CSSProperties}>
                 <div className="tier-id"><span>T-01 // Joker</span><span className="suit-mark">♦</span></div>
                 <div className="tier-name">Joker</div>
                 <div className="tier-kind">Title Partner</div>
                 <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
               </div>
-            </div>
+            </StaggerItem>
 
             {/* Tier 2 — Ace */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
               <div className="tier" style={{ '--c': 'var(--ace)', width: '100%' } as React.CSSProperties}>
                 <div className="tier-id"><span>T-02 // Ace</span><span className="suit-mark">♠</span></div>
                 <div className="tier-name">Ace</div>
                 <div className="tier-kind">Premium Partner</div>
                 <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
               </div>
-            </div>
+            </StaggerItem>
 
             {/* Tier 3 — King */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
               <div className="tier" style={{ '--c': 'var(--king)', width: '100%' } as React.CSSProperties}>
                 <div className="tier-id"><span>T-03 // King</span><span className="suit-mark">♣</span></div>
                 <div className="tier-name">King</div>
                 <div className="tier-kind">Standard Partner</div>
                 <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
               </div>
-            </div>
+            </StaggerItem>
 
             {/* Tier 4 — Queen */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
               <div className="tier" style={{ '--c': 'var(--queen)', width: '100%' } as React.CSSProperties}>
                 <div className="tier-id"><span>T-04 // Queen</span><span className="suit-mark">♥</span></div>
                 <div className="tier-name">Queen</div>
                 <div className="tier-kind">Entry Partner</div>
                 <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
               </div>
-            </div>
+            </StaggerItem>
 
-          </div>
+          </Stagger>
 
-          <div style={{
+          <Reveal y={16} style={{
             marginTop: 52,
             paddingTop: 36,
             borderTop: '1px solid var(--on-navy-rule)',
@@ -256,7 +268,7 @@ export default function Home() {
               </a>
               {' '}for more details.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
