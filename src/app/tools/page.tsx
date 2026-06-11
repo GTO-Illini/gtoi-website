@@ -1,3 +1,5 @@
+import { FadeIn, Stagger, StaggerItem } from '../components/motion';
+
 export default function Tools() {
   return (
     <main>
@@ -14,32 +16,36 @@ export default function Tools() {
           pointerEvents: 'none', userSelect: 'none',
         }}>♠</div>
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <span className="eyebrow on-navy">Resources</span>
-          <h1 style={{
-            fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
-            color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
-          }}>
-            GTO <span className="accent">Tools</span>
-          </h1>
+          <FadeIn delay={0.05} y={14}>
+            <span className="eyebrow on-navy">Resources</span>
+          </FadeIn>
+          <FadeIn delay={0.12} y={18}>
+            <h1 style={{
+              fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: .96,
+              color: '#fff', marginTop: 16, fontWeight: 500, letterSpacing: '-.02em',
+            }}>
+              GTO <span className="accent">Tools</span>
+            </h1>
+          </FadeIn>
         </div>
       </header>
 
       {/* ===== RESOURCES ===== */}
       <section className="section">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">01 — Tools</div>
-            <h2>Poker <span className="accent">Resources</span></h2>
-          </div>
-          <div className="card-grid c2" style={{ marginTop: 44 }}>
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>01 — Tools</StaggerItem>
+            <StaggerItem as="h2" y={16}>Poker <span className="accent">Resources</span></StaggerItem>
+          </Stagger>
+          <Stagger className="card-grid c2" stagger={0.06} style={{ marginTop: 44 }}>
 
-            <div className="card" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
+            <StaggerItem className="card" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Coming Soon</span>
               <h4>Poker Solver</h4>
               <p>Our in-house poker solver tool is in development. Stay tuned.</p>
-            </div>
+            </StaggerItem>
 
-            <div className="card" style={{ '--c': 'var(--ace)' } as React.CSSProperties}>
+            <StaggerItem className="card" style={{ '--c': 'var(--ace)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Available Now</span>
               <h4>Poker Lecture Videos</h4>
               <p>Enjoy Game of Gold for now :D</p>
@@ -55,9 +61,9 @@ export default function Tools() {
                   style={{ border: 'none', display: 'block' }}
                 />
               </div>
-            </div>
+            </StaggerItem>
 
-          </div>
+          </Stagger>
         </div>
       </section>
 

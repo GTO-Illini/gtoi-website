@@ -1,3 +1,5 @@
+import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
+
 const roster = [
   { seat: '01', role: 'Captain',   name: 'Patrick Smith',  year: '4th year',  image: '/image-assets/leadership_photos/Patrick.webp',  color: 'var(--orange)' },
   { seat: '02', role: 'Player',    name: 'Gavin Wu',       year: 'PhD',        image: '/image-assets/leadership_photos/Gavin.webp',    color: 'var(--felt)'   },
@@ -30,36 +32,42 @@ export default function CompetitiveTeam() {
         }}>♠</div>
 
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <span className="eyebrow on-navy">IPA Challengers Division · 2025–26</span>
-          <h1 style={{
-            fontSize: 'clamp(40px, 6vw, 72px)',
-            lineHeight: .96,
-            color: '#fff',
-            marginTop: 16,
-            fontWeight: 500,
-            letterSpacing: '-.02em',
-          }}>
-            The Competitive <span className="accent">Team</span>
-          </h1>
-          <p style={{
-            fontSize: 'clamp(15px, 2vw, 18px)',
-            lineHeight: 1.55,
-            maxWidth: 560,
-            color: 'var(--on-navy-2)',
-            marginTop: 20,
-          }}>
-            The roster who carried GTO Illini&apos;s colors through our debut intercollegiate
-            season — earning the top regular-season seed and a finals appearance.
-          </p>
+          <FadeIn delay={0.05} y={14}>
+            <span className="eyebrow on-navy">IPA Challengers Division · 2025–26</span>
+          </FadeIn>
+          <FadeIn delay={0.12} y={18}>
+            <h1 style={{
+              fontSize: 'clamp(40px, 6vw, 72px)',
+              lineHeight: .96,
+              color: '#fff',
+              marginTop: 16,
+              fontWeight: 500,
+              letterSpacing: '-.02em',
+            }}>
+              The Competitive <span className="accent">Team</span>
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.19} y={16}>
+            <p style={{
+              fontSize: 'clamp(15px, 2vw, 18px)',
+              lineHeight: 1.55,
+              maxWidth: 560,
+              color: 'var(--on-navy-2)',
+              marginTop: 20,
+            }}>
+              The roster who carried GTO Illini&apos;s colors through our debut intercollegiate
+              season — earning the top regular-season seed and a finals appearance.
+            </p>
+          </FadeIn>
 
-          <div className="hero-stats">
+          <Stagger className="hero-stats" stagger={0.05} delay={0.26}>
             {[
-              { k: 'Regular-season seed', v: 'No. 1' },
+              { k: 'Regular-season seed', v: 'No. 1' },
               { k: 'Points',              v: '222'         },
               { k: 'Playoff finish',      v: '2nd'         },
               { k: 'Roster',              v: '5'           },
             ].map(({ k, v }) => (
-              <div key={k}>
+              <StaggerItem key={k} y={12}>
                 <div style={{
                   fontFamily: 'var(--font-ibm-plex-mono)',
                   fontSize: 10,
@@ -69,49 +77,49 @@ export default function CompetitiveTeam() {
                   marginBottom: 6,
                 }}>{k}</div>
                 <div style={{ fontSize: 22, fontWeight: 600, color: '#fff', letterSpacing: '-.01em' }}>{v}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </header>
 
       {/* ===== 01 LAST SEASON ===== */}
       <section className="section">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">01 — Last Season</div>
-            <h2>How We <span className="accent">Played</span></h2>
-          </div>
-          <p className="lede">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>01 — Last Season</StaggerItem>
+            <StaggerItem as="h2" y={16}>How We <span className="accent">Played</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
             A debut campaign in the IPA Challengers Division: first across the regular season,
             runners-up in the championship bracket.
-          </p>
+          </Reveal>
 
-          <div className="stat-grid" style={{ marginTop: 48 }}>
-            <div className="stat">
+          <Stagger className="stat-grid" stagger={0.04} style={{ marginTop: 48 }}>
+            <StaggerItem className="stat">
               <div className="k">Regular season</div>
               <div className="n">1<span className="u">st</span></div>
               <div className="d">Top overall seed of the Challengers Division.</div>
-            </div>
-            <div className="stat">
+            </StaggerItem>
+            <StaggerItem className="stat">
               <div className="k">Points</div>
               <div className="n">222</div>
               <div className="d">Accumulated across the regular-season slate.</div>
-            </div>
-            <div className="stat">
+            </StaggerItem>
+            <StaggerItem className="stat">
               <div className="k">Playoffs</div>
               <div className="n">2<span className="u">nd</span></div>
               <div className="d">Division finalists in the championship bracket.</div>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
 
-          <p style={{
+          <Reveal as="p" y={10} style={{
             fontFamily: 'var(--font-ibm-plex-mono)',
             fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
             color: 'var(--muted)', marginTop: 52, marginBottom: 16,
-          }}>{'// The finishes'}</p>
-          <div className="card-grid c2">
-            <div className="card" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
+          }}>{'// The finishes'}</Reveal>
+          <Stagger className="card-grid c2" stagger={0.06}>
+            <StaggerItem className="card" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Regular Season</span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 4 }}>
                 <b style={{ fontSize: 38, fontWeight: 500, lineHeight: 1, letterSpacing: '-.02em', color: 'var(--orange)' }}>
@@ -122,8 +130,8 @@ export default function CompetitiveTeam() {
               <div style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 12, color: 'var(--muted)', letterSpacing: '.04em' }}>
                 222 points · No. 1 overall
               </div>
-            </div>
-            <div className="card" style={{ '--c': 'var(--felt-2)' } as React.CSSProperties}>
+            </StaggerItem>
+            <StaggerItem className="card" style={{ '--c': 'var(--felt-2)' } as React.CSSProperties}>
               <span className="tag"><span className="dot" />Playoffs</span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 4 }}>
                 <b style={{ fontSize: 38, fontWeight: 500, lineHeight: 1, letterSpacing: '-.02em', color: 'var(--felt-2)' }}>
@@ -134,26 +142,26 @@ export default function CompetitiveTeam() {
               <div style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 12, color: 'var(--muted)', letterSpacing: '.04em' }}>
                 Runner-up · championship bracket
               </div>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
       {/* ===== 02 ROSTER ===== */}
       <section className="section navy">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">02 — Roster</div>
-            <h2>Meet The <span className="accent">Team</span></h2>
-          </div>
-          <div style={{
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>02 — Roster</StaggerItem>
+            <StaggerItem as="h2" y={16}>Meet The <span className="accent">Team</span></StaggerItem>
+          </Stagger>
+          <Stagger stagger={0.05} style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
             gap: 16,
             marginTop: 44,
           }}>
             {roster.map(({ seat, role, name, year, image, color }) => (
-              <div
+              <StaggerItem
                 key={seat}
                 className="team-card"
                 style={{ '--c': color, color: 'var(--ink)' } as React.CSSProperties}
@@ -174,37 +182,41 @@ export default function CompetitiveTeam() {
                   <div className="nm">{name}</div>
                   <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{year}</div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ===== 03 JOIN ===== */}
       <section className="section tight" id="join">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">03 — Join</div>
-            <h2>Interested In <span className="accent">Joining?</span></h2>
-          </div>
-          <p className="lede">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>03 — Join</StaggerItem>
+            <StaggerItem as="h2" y={16}>Interested In <span className="accent">Joining?</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
             We&apos;re always looking for sharp, competitive players to grow the roster.
             No experience required — just the willingness to study!
             DM Patrick on discord for more info.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 32 }}>
-            <a
-              className="btn orange"
-              href="https://discord.com/invite/4ZZCqMRTwQ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join our Discord
-            </a>
-            <a className="btn ghost" href="/events">
-              See upcoming events
-            </a>
-          </div>
+          </Reveal>
+          <Stagger stagger={0.04} style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 32 }}>
+            <StaggerItem y={12}>
+              <a
+                className="btn orange"
+                href="https://discord.com/invite/4ZZCqMRTwQ"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join our Discord
+              </a>
+            </StaggerItem>
+            <StaggerItem y={12}>
+              <a className="btn ghost" href="/events">
+                See upcoming events
+              </a>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 

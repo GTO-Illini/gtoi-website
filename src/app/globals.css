@@ -3,31 +3,11 @@
 @tailwind utilities;
 
 /* ============================================================
-   PAGE & SCROLL ANIMATIONS
-   ============================================================ */
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(32px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-main {
-  animation: pageIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.will-reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.did-reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
    DESIGN TOKENS
    ============================================================ */
 :root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
   --bg:      #ecedf1;
   --bg-2:    #e0e2e8;
   --paper:   #f6f7fa;
@@ -179,11 +159,12 @@ hr.rule::after {
   padding: 13px 22px;
   border: 1px solid var(--b); background: var(--b); color: #fff;
   text-decoration: none; border-radius: 3px; cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  transition: transform .22s var(--ease-out), box-shadow .22s var(--ease-out),
+              background .22s var(--ease-out), border-color .22s var(--ease-out);
 }
-.btn::after { content: "→"; transition: transform .15s ease; }
+.btn::after { content: "→"; transition: transform .22s var(--ease-out); }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(19,41,75,.22); }
-.btn:hover::after { transform: translateX(4px); }
+.btn:hover::after { transform: translateX(6px); }
 .btn.orange { --b: var(--orange); }
 .btn.ghost {
   background: transparent; color: var(--felt); border-color: var(--rule-2);
@@ -213,9 +194,23 @@ hr.rule::after {
   padding: 22px;
   display: flex; flex-direction: column; gap: 10px;
   color: var(--ink);
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out),
+              border-color .25s var(--ease-out);
 }
-.card.hoverable:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(19,41,75,.14); }
+.card.hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(19,41,75,.14);
+  border-left-color: color-mix(in srgb, var(--orange) 35%, var(--rule));
+  border-right-color: color-mix(in srgb, var(--orange) 35%, var(--rule));
+  border-bottom-color: color-mix(in srgb, var(--orange) 35%, var(--rule));
+}
+/* Hover states need more contrast against navy bands */
+.section.navy .card.hoverable:hover {
+  box-shadow: 0 16px 36px rgba(0,0,0,.38);
+  border-left-color: color-mix(in srgb, var(--orange) 50%, var(--rule));
+  border-right-color: color-mix(in srgb, var(--orange) 50%, var(--rule));
+  border-bottom-color: color-mix(in srgb, var(--orange) 50%, var(--rule));
+}
 .card .tag {
   font-family: var(--font-ibm-plex-mono, 'IBM Plex Mono'), monospace;
   font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
@@ -255,9 +250,18 @@ hr.rule::after {
 .team-card {
   background: var(--paper); border: 1px solid var(--rule);
   border-radius: 4px; overflow: hidden; color: var(--ink);
+  transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+}
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(19,41,75,.16);
 }
 .team-card .photo { width: 100%; aspect-ratio: 4/5; background: var(--bg-2); overflow: hidden; }
-.team-card .photo img { width: 100%; height: 100%; object-fit: cover; }
+.team-card .photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: filter .3s var(--ease-out);
+}
+.team-card:hover .photo img { filter: brightness(1.08); }
 .team-card .meta { padding: 16px 18px; border-top: 3px solid var(--c, var(--felt)); }
 .team-card .role {
   font-family: var(--font-ibm-plex-mono, 'IBM Plex Mono'), monospace;
@@ -491,6 +495,18 @@ hr.rule::after {
   .tl-row { grid-template-columns: 64px 1fr; }
   .tl-tag { display: none; }
 }
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (max-width: 720px) {
   .card-grid.c2, .card-grid.c3, .card-grid.c4 { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: 1fr; }

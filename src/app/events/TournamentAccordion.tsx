@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 interface Tournament {
   id: string;
@@ -61,16 +62,23 @@ const DETAILS = [
 export default function TournamentAccordion() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const reduced = useReducedMotion();
 
   return (
     <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 10, marginInline: 'calc(-1 * var(--gutter))' }}>
-      {TOURNAMENTS.map((t) => {
+      {TOURNAMENTS.map((t, index) => {
         const isOpen = openId === t.id;
         const isHovered = hoveredId === t.id;
 
         return (
-          <div
+          <motion.div
             key={t.id}
+            initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1, margin: '0px 0px -40px 0px' }}
+            transition={reduced
+              ? { duration: 0 }
+              : { type: 'spring', stiffness: 300, damping: 30, delay: index * 0.06 }}
             onMouseEnter={() => setHoveredId(t.id)}
             onMouseLeave={() => setHoveredId(null)}
             style={{
@@ -120,75 +128,90 @@ export default function TournamentAccordion() {
                   background: isOpen ? 'rgba(255,255,255,0.08)' : 'transparent',
                   transition: 'background 0.15s',
                 }}>
-                  <svg
+                  <motion.svg
                     width="18" height="18" viewBox="0 0 16 16" fill="none"
                     aria-hidden
-                    style={{
-                      color: 'var(--on-navy-2)',
-                      transition: 'transform 0.28s cubic-bezier(0.4,0,0.2,1)',
-                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    }}
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 26 }}
+                    style={{ color: 'var(--on-navy-2)' }}
                   >
                     <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  </motion.svg>
                 </div>
               </div>
             </div>
 
-            {/* Animated slide drawer */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateRows: isOpen ? '1fr' : '0fr',
-                transition: 'grid-template-rows 0.3s cubic-bezier(0.4,0,0.2,1)',
-              }}
-            >
-              <div style={{ overflow: 'hidden' }}>
-                <div style={{ padding: '16px 24px 20px' }}>
-                  {/* Themed paper info card */}
-                  <div style={{
-                    background: 'var(--paper)',
-                    border: '1px solid var(--rule)',
-                    borderLeft: `3px solid ${t.accent}`,
-                    borderRadius: 4,
-                    color: 'var(--ink)',
-                    padding: '20px 24px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 14,
-                  }}>
+            {/* Animated drawer */}
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="drawer"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={reduced
+                    ? { duration: 0 }
+                    : {
+                        height: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+                        opacity: { duration: 0.22, ease: 'easeOut' },
+                      }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  {/* Content materializes just after the drawer starts opening */}
+                  <motion.div
+                    initial={{ opacity: 0, y: reduced ? 0 : 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={reduced
+                      ? { duration: 0 }
+                      : { duration: 0.25, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                    style={{ padding: '16px 24px 20px' }}
+                  >
+                    {/* Themed paper info card */}
                     <div style={{
-                      fontFamily: 'var(--font-ibm-plex-mono)',
-                      fontSize: 10,
-                      letterSpacing: '.14em',
-                      textTransform: 'uppercase',
-                      color: 'var(--muted)',
+                      background: 'var(--paper)',
+                      border: '1px solid var(--rule)',
+                      borderLeft: `3px solid ${t.accent}`,
+                      borderRadius: 4,
+                      color: 'var(--ink)',
+                      padding: '20px 24px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 14,
                     }}>
-                      {'// Event Details'}
-                    </div>
-                    {DETAILS.map(({ label, value }) => (
-                      <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
-                        <span style={{
-                          fontFamily: 'var(--font-ibm-plex-mono)',
-                          fontSize: 11,
-                          letterSpacing: '.1em',
-                          textTransform: 'uppercase',
-                          color: 'var(--muted)',
-                          minWidth: 112,
-                          flexShrink: 0,
-                        }}>{label}</span>
-                        <span style={{
-                          fontSize: 14,
-                          color: 'var(--ink-2)',
-                          fontStyle: 'italic',
-                        }}>{value}</span>
+                      <div style={{
+                        fontFamily: 'var(--font-ibm-plex-mono)',
+                        fontSize: 10,
+                        letterSpacing: '.14em',
+                        textTransform: 'uppercase',
+                        color: 'var(--muted)',
+                      }}>
+                        {'// Event Details'}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                      {DETAILS.map(({ label, value }) => (
+                        <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
+                          <span style={{
+                            fontFamily: 'var(--font-ibm-plex-mono)',
+                            fontSize: 11,
+                            letterSpacing: '.1em',
+                            textTransform: 'uppercase',
+                            color: 'var(--muted)',
+                            minWidth: 112,
+                            flexShrink: 0,
+                          }}>{label}</span>
+                          <span style={{
+                            fontSize: 14,
+                            color: 'var(--ink-2)',
+                            fontStyle: 'italic',
+                          }}>{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         );
       })}
     </div>

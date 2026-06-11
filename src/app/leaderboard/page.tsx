@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
 
 export default function Leaderboard() {
   return (
@@ -24,38 +25,44 @@ export default function Leaderboard() {
         }}>♠</div>
 
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <span className="eyebrow on-navy">Season 2026–27 · Current Season</span>
-          <h1 style={{
-            fontSize: 'clamp(40px, 6vw, 72px)',
-            lineHeight: .96,
-            color: '#fff',
-            marginTop: 16,
-            fontWeight: 500,
-            letterSpacing: '-.02em',
-          }}>
-            Club <span className="accent">Leaderboard</span>
-          </h1>
-          <p style={{
-            fontSize: 'clamp(15px, 2vw, 18px)',
-            lineHeight: 1.55,
-            maxWidth: 560,
-            color: 'var(--on-navy-2)',
-            marginTop: 20,
-          }}>
-            Cumulative chip counts across all sanctioned GTO Illini sessions.
-          </p>
+          <FadeIn delay={0.05} y={14}>
+            <span className="eyebrow on-navy">Season 2026–27 · Current Season</span>
+          </FadeIn>
+          <FadeIn delay={0.12} y={18}>
+            <h1 style={{
+              fontSize: 'clamp(40px, 6vw, 72px)',
+              lineHeight: .96,
+              color: '#fff',
+              marginTop: 16,
+              fontWeight: 500,
+              letterSpacing: '-.02em',
+            }}>
+              Club <span className="accent">Leaderboard</span>
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.19} y={16}>
+            <p style={{
+              fontSize: 'clamp(15px, 2vw, 18px)',
+              lineHeight: 1.55,
+              maxWidth: 560,
+              color: 'var(--on-navy-2)',
+              marginTop: 20,
+            }}>
+              Cumulative chip counts across all sanctioned GTO Illini sessions.
+            </p>
+          </FadeIn>
         </div>
       </header>
 
       {/* ===== COMING SOON ===== */}
       <section className="section">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">01 — Rankings</div>
-            <h2>Season <span className="accent">Standings</span></h2>
-          </div>
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>01 — Rankings</StaggerItem>
+            <StaggerItem as="h2" y={16}>Season <span className="accent">Standings</span></StaggerItem>
+          </Stagger>
 
-          <div style={{
+          <Reveal y={20} style={{
             marginTop: 44,
             background: 'var(--paper)',
             border: '1px solid var(--rule)',
@@ -101,10 +108,10 @@ export default function Leaderboard() {
               Rankings will be posted here once the season kicks off.
               Check back soon.
             </p>
-          </div>
+          </Reveal>
 
           {/* Past leaderboards CTA */}
-          <div style={{
+          <Reveal y={16} style={{
             marginTop: 40,
             paddingTop: 32,
             borderTop: '1px solid var(--rule)',
@@ -129,7 +136,7 @@ export default function Leaderboard() {
             <Link href="/leaderboard/past" className="btn ghost">
               2025–2026 Leaderboard
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 

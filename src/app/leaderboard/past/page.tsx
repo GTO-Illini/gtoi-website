@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
+import { FadeIn, Reveal, Stagger, StaggerItem } from '../../components/motion';
 
 const SEASON = '2025–26';
 const SESSION_DATE = '4/29/26';
@@ -86,8 +88,18 @@ function RankMedal({ rank }: { rank: number }) {
 }
 
 export default function PastLeaderboards() {
+  const reduced = useReducedMotion();
   const top3 = players.slice(0, 3);
   const rest  = players.slice(3);
+
+  const rowReveal = (delay: number) => ({
+    initial: { opacity: 0, y: reduced ? 0 : 10 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: reduced
+      ? { duration: 0 }
+      : { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const, delay },
+  });
 
   const rowBase: React.CSSProperties = {
     display: 'grid',
@@ -129,50 +141,58 @@ export default function PastLeaderboards() {
         }}>♠</div>
 
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
-          <Link href="/leaderboard" style={{
-            fontFamily: 'var(--font-ibm-plex-mono, "IBM Plex Mono"), monospace',
-            fontSize: 11,
-            letterSpacing: '.12em',
-            textTransform: 'uppercase',
-            color: 'var(--on-navy-2)',
-            textDecoration: 'none',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            marginBottom: 16,
-            transition: 'color .15s ease',
-          }}>
-            ← Leaderboard
-          </Link>
-          <span className="eyebrow on-navy">Archive · Season {SEASON}</span>
-          <h1 style={{
-            fontSize: 'clamp(40px, 6vw, 72px)',
-            lineHeight: .96,
-            color: '#fff',
-            marginTop: 16,
-            fontWeight: 500,
-            letterSpacing: '-.02em',
-          }}>
-            Past <span className="accent">Leaderboards</span>
-          </h1>
-          <p style={{
-            fontSize: 'clamp(15px, 2vw, 18px)',
-            lineHeight: 1.55,
-            maxWidth: 560,
-            color: 'var(--on-navy-2)',
-            marginTop: 20,
-          }}>
-            Final standings from previous GTO Illini seasons.
-          </p>
+          <FadeIn y={10}>
+            <Link href="/leaderboard" style={{
+              fontFamily: 'var(--font-ibm-plex-mono, "IBM Plex Mono"), monospace',
+              fontSize: 11,
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              color: 'var(--on-navy-2)',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              marginBottom: 16,
+              transition: 'color .15s ease',
+            }}>
+              ← Leaderboard
+            </Link>
+          </FadeIn>
+          <FadeIn delay={0.05} y={14}>
+            <span className="eyebrow on-navy">Archive · Season {SEASON}</span>
+          </FadeIn>
+          <FadeIn delay={0.12} y={18}>
+            <h1 style={{
+              fontSize: 'clamp(40px, 6vw, 72px)',
+              lineHeight: .96,
+              color: '#fff',
+              marginTop: 16,
+              fontWeight: 500,
+              letterSpacing: '-.02em',
+            }}>
+              Past <span className="accent">Leaderboards</span>
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.19} y={16}>
+            <p style={{
+              fontSize: 'clamp(15px, 2vw, 18px)',
+              lineHeight: 1.55,
+              maxWidth: 560,
+              color: 'var(--on-navy-2)',
+              marginTop: 20,
+            }}>
+              Final standings from previous GTO Illini seasons.
+            </p>
+          </FadeIn>
 
-          <div className="hero-stats">
+          <Stagger className="hero-stats" stagger={0.05} delay={0.26}>
             {[
               { k: 'Season',         v: SEASON },
               { k: 'Players ranked', v: players.length.toString() },
               { k: 'Champion',       v: players[0].name.split(' ')[0] },
               { k: 'Top score',      v: fmt(players[0].total) },
             ].map(({ k, v }) => (
-              <div key={k}>
+              <StaggerItem key={k} y={12}>
                 <div style={{
                   fontFamily: 'var(--font-ibm-plex-mono)',
                   fontSize: 10,
@@ -182,25 +202,25 @@ export default function PastLeaderboards() {
                   marginBottom: 6,
                 }}>{k}</div>
                 <div style={{ fontSize: 22, fontWeight: 600, color: '#fff', letterSpacing: '-.01em' }}>{v}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </header>
 
       {/* ===== SEASON 2025-26 ===== */}
       <section className="section tight">
         <div className="wrap">
-          <div className="section-head">
-            <div className="num">2025–26</div>
-            <h2>Final <span className="accent">Standings</span></h2>
-          </div>
-          <p className="lede" style={{ marginBottom: 0 }}>
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>2025–26</StaggerItem>
+            <StaggerItem as="h2" y={16}>Final <span className="accent">Standings</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12} style={{ marginBottom: 0 }}>
             Season {SEASON} final leaderboard — last updated {SESSION_DATE}.
-          </p>
+          </Reveal>
 
           {/* Podium — top 3 */}
-          <div style={{
+          <Stagger stagger={0.06} style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 16,
@@ -214,7 +234,7 @@ export default function PastLeaderboards() {
               };
               const color = accentColors[p.rank];
               return (
-                <div key={p.rank} className="card" style={{ '--c': color } as React.CSSProperties}>
+                <StaggerItem key={p.rank} className="card" style={{ '--c': color } as React.CSSProperties}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <span className="tag">
                       <span className="dot" />
@@ -237,10 +257,10 @@ export default function PastLeaderboards() {
                   }}>
                     {fmt(p.total)} pts
                   </div>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
 
           {/* Full table */}
           <div style={{
@@ -251,7 +271,7 @@ export default function PastLeaderboards() {
             overflow: 'hidden',
           }}>
             {/* Table header */}
-            <div style={{
+            <motion.div {...rowReveal(0)} style={{
               ...rowBase,
               background: 'var(--bg-2)',
               borderBottom: '2px solid var(--rule)',
@@ -269,12 +289,13 @@ export default function PastLeaderboards() {
                   {col === '#' ? <><span style={{ color: 'var(--orange)', opacity: .9 }}>{'//'}</span> {col}</> : col}
                 </div>
               ))}
-            </div>
+            </motion.div>
 
             {/* All rows */}
             {rest.map((p, idx) => (
-              <div
+              <motion.div
                 key={p.rank}
+                {...rowReveal((idx % 12) * 0.025)}
                 style={{
                   ...rowBase,
                   background: idx % 2 === 0 ? 'var(--paper)' : 'var(--bg)',
@@ -302,12 +323,12 @@ export default function PastLeaderboards() {
                 }}>
                   {p.session > 0 ? `+${fmt(p.session)}` : '—'}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Legend */}
-          <div style={{
+          <Reveal y={10} style={{
             display: 'flex',
             flexWrap: 'wrap',
             gap: '8px 28px',
@@ -321,7 +342,7 @@ export default function PastLeaderboards() {
             <span><span style={{ color: 'var(--orange)', fontWeight: 700 }}>−n</span> — moved down</span>
             <span><span style={{ fontWeight: 700 }}>*</span> — no change</span>
             <span style={{ marginLeft: 'auto' }}>Last session: {SESSION_DATE}</span>
-          </div>
+          </Reveal>
         </div>
       </section>
 
