@@ -4,6 +4,9 @@
   z-index: 100;
   background: var(--felt);
   border-bottom: 1px solid var(--on-navy-rule);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .inner {
@@ -23,6 +26,7 @@
   gap: 11px;
   text-decoration: none;
   margin-right: auto;
+  cursor: pointer;
 }
 
 .brandImg {
@@ -79,6 +83,7 @@
   border-radius: 3px;
   position: relative;
   transition: color .15s ease;
+  cursor: pointer;
 }
 .link:hover { color: #fff; }
 
@@ -142,6 +147,7 @@
   text-decoration: none;
   padding: 14px var(--gutter);
   transition: color .15s ease, background .15s ease;
+  cursor: pointer;
 }
 .mobileLink:hover,
 .mobileLink:active { color: #fff; background: rgba(255, 255, 255, .04); }
