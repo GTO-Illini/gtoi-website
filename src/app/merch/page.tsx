@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { merch } from "@/lib/data/merch";
 import styles from "./Merch.module.css";
 import { FadeIn, Reveal, Stagger, StaggerItem } from "../components/motion";
+
+export const metadata: Metadata = {
+  title: "Merch",
+  description:
+    "Official GTO Illini merch for the UIUC poker club at the University of Illinois Urbana-Champaign. Rep the club on campus.",
+  alternates: { canonical: "/merch" },
+};
 
 export default function Merch() {
   return (

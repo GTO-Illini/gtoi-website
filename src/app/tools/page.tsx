@@ -1,4 +1,12 @@
+import type { Metadata } from 'next';
 import { FadeIn, Stagger, StaggerItem } from '../components/motion';
+
+export const metadata: Metadata = {
+  title: 'Poker Tools & Resources',
+  description:
+    'Poker study tools, solvers, and learning resources curated by GTO Illini, the UIUC poker club at the University of Illinois Urbana-Champaign.',
+  alternates: { canonical: '/tools' },
+};
 
 export default function Tools() {
   return (
