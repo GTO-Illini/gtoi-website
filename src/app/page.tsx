@@ -35,7 +35,7 @@ export default function Home() {
           paddingBlock: 'clamp(64px, 10vw, 128px)',
         }}>
           <FadeIn delay={0.05} y={14}>
-            <span className="eyebrow on-navy">Game Theory Optimal @ UIUC</span>
+            <span className="eyebrow on-navy">UIUC&apos;s Premier Poker Club · Game Theory Optimal</span>
           </FadeIn>
           <FadeIn delay={0.12} y={18}>
             <h1 style={{
@@ -78,6 +78,17 @@ export default function Home() {
               </a>
             </FadeIn>
           </div>
+          <FadeIn delay={0.34} y={12}>
+            <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 18 }}>
+              Questions about joining? Email{' '}
+              <a
+                href="mailto:membership@gtoillini.com"
+                style={{ color: 'var(--orange)', textDecoration: 'underline' }}
+              >
+                membership@gtoillini.com
+              </a>
+            </p>
+          </FadeIn>
         </div>
       </header>
 

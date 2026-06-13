@@ -1,5 +1,13 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
+
+export const metadata: Metadata = {
+  title: 'Leaderboard & Standings',
+  description:
+    'Tournament standings and the all-time leaderboard for GTO Illini, the UIUC poker club at the University of Illinois Urbana-Champaign.',
+  alternates: { canonical: '/leaderboard' },
+};
 
 export default function Leaderboard() {
   return (

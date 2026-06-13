@@ -1,6 +1,15 @@
 import TournamentAccordion from './TournamentAccordion';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Poker Tournaments & Events',
+  description:
+    'Weekly poker tournaments and events hosted by GTO Illini, the UIUC poker club at the University of Illinois Urbana-Champaign. See the schedule and join us.',
+  alternates: { canonical: '/events' },
+};
+
 export default function Events() {
   return (
     <main>

@@ -29,6 +29,7 @@ export default function Footer() {
           </div>
           <div className="foot-col">
             <h5>Get in touch</h5>
+            <a href="mailto:membership@gtoillini.com">membership@gtoillini.com</a>
             <a href="mailto:corporate-outreach@gtoillini.com">corporate-outreach@gtoillini.com</a>
             <p>University of Illinois<br />Urbana-Champaign</p>
           </div>

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
 
 const roster = [
@@ -7,6 +8,13 @@ const roster = [
   { seat: '04', role: 'Player',    name: 'Eric Song',      year: '2nd year',   image: '/image-assets/leadership_photos/eric.png',      color: 'var(--queen)'  },
   { seat: '05', role: 'Player',    name: 'Dylan Wu',       year: 'Graduated',  image: '/image-assets/leadership_photos/dylan.jpg',     color: 'var(--felt-2)' },
 ];
+
+export const metadata: Metadata = {
+  title: 'Competitive Team',
+  description:
+    'Meet the GTO Illini competitive poker team representing the University of Illinois Urbana-Champaign (UIUC) in intercollegiate poker competition.',
+  alternates: { canonical: '/competitive-team' },
+};
 
 export default function CompetitiveTeam() {
   return (
@@ -198,7 +206,14 @@ export default function CompetitiveTeam() {
           <Reveal as="p" className="lede" y={12}>
             We&apos;re always looking for sharp, competitive players to grow the roster.
             No experience required — just the willingness to study!
-            DM Patrick on discord for more info.
+            DM Patrick on discord or email{' '}
+            <a
+              href="mailto:membership@gtoillini.com"
+              style={{ color: 'var(--orange)', textDecoration: 'underline' }}
+            >
+              membership@gtoillini.com
+            </a>
+            {' '}for more info.
           </Reveal>
           <Stagger stagger={0.04} style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 32 }}>
             <StaggerItem y={12}>
