@@ -60,7 +60,7 @@ export default function Home() {
               paddingLeft: 18,
               borderLeft: '2px solid var(--orange)',
             }}>
-              The poker club at the University of Illinois Urbana-Champaign (UIUC).
+              Poker at the University of Illinois
             </p>
           </FadeIn>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
