@@ -29,8 +29,8 @@ const SITE_URL = "https://gtoillini.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "GTO Illini — UIUC's Premier Poker Club",
-    template: "%s | GTO Illini — UIUC's Premier Poker Club",
+    default: "GTO Illini @ UIUC",
+    template: "%s | GTO Illini @ UIUC",
   },
   description:
     "GTO Illini is the poker club at the University of Illinois Urbana-Champaign (UIUC). 300+ members studying game theory optimal strategy, weekly tournaments, and competitive intercollegiate poker.",
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     "game theory optimal",
     "poker tournaments Champaign Urbana",
     "intercollegiate poker",
+    "UIUC poker tournaments"
   ],
   applicationName: "GTO Illini",
   alternates: {
@@ -52,8 +53,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "GTO Illini — UIUC's Premier Poker Club",
-    title: "GTO Illini — UIUC's Premier Poker Club",
+    siteName: "GTO Illini @ UIUC",
+    title: "GTO Illini @ UIUC",
     description:
       "The poker club at the University of Illinois Urbana-Champaign. Game theory optimal strategy, weekly tournaments, and competitive intercollegiate play.",
     locale: "en_US",
