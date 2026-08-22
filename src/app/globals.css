@@ -549,3 +549,27 @@ hr.rule::after {
   .tl-row { grid-template-columns: 1fr; }
   .tl-date { flex-direction: row; align-items: baseline; gap: 10px; }
 }
+
+/* ============================================================
+   SPONSOR LOGOS
+   ============================================================ */
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.sponsor-logo {
+  display: flex; align-items: center; justify-content: center;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px 32px;
+  min-height: 132px;
+  cursor: pointer;
+  transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+}
+.sponsor-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.28);
+}
+.sponsor-logo img { max-width: 100%; max-height: 72px; height: auto; object-fit: contain; }
