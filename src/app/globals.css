@@ -368,6 +368,38 @@ hr.rule::after {
 .weekly h4 { font-size: 20px; color: var(--ink); margin: 10px 0 6px; }
 .weekly .when { font-size: 14px; color: var(--ink-2); }
 
+/* Expandable weekly card (orientation events) */
+.weekly details > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "id chevron" "title chevron" "when chevron";
+  gap: 0 16px;
+  align-items: center;
+}
+.weekly details > summary::-webkit-details-marker { display: none; }
+.weekly details > summary .id { grid-area: id; }
+.weekly details > summary h4 { grid-area: title; }
+.weekly details > summary .when { grid-area: when; }
+.weekly details > summary::after {
+  grid-area: chevron;
+  content: "";
+  width: 10px; height: 10px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .2s var(--ease-out);
+}
+.weekly details[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.weekly details > p {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 15px; line-height: 1.55; color: var(--ink-2);
+}
+
+
 /* ============================================================
    SEASON TIMELINE
    ============================================================ */

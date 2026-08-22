@@ -40,34 +40,67 @@ export default function Events() {
         </div>
       </header>
 
-      {/* ===== WEEKLY RECURRING ===== */}
+      {/* ===== ORIENTATION ===== */}
       <section className="section">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
-            <StaggerItem className="num" y={12}>01 — Recurring</StaggerItem>
+            <StaggerItem className="num" y={12}>01 — Orientation</StaggerItem>
+            <StaggerItem as="h2" y={16}>Start <span className="accent">Here</span></StaggerItem>
+          </Stagger>
+
+          <Stagger className="weekly-grid" stagger={0.06} style={{ marginTop: 40 }}>
+            <StaggerItem className="weekly" style={{ '--c': 'var(--king)' } as React.CSSProperties}>
+              <details>
+                <summary>
+                  <div className="id">1.0.1 · Quad Day</div>
+                  <h4>Visit Us at Quad Day</h4>
+                  <div className="when">Sun, Aug 23 · 12:00–4:00 PM · Stall 126, Math &amp; Engineering section</div>
+                </summary>
+                <p>Join us at Quad Day to learn about the club, say hi to the team, and take a quiz to potentially win some cool, poker-related prizes!</p>
+              </details>
+            </StaggerItem>
+            <StaggerItem className="weekly" style={{ '--c': 'var(--joker)' } as React.CSSProperties}>
+              <details>
+                <summary>
+                  <div className="id">1.0.2 · Info Session</div>
+                  <h4>GTO Illini Info Session</h4>
+                  <div className="when">Tue, Aug 25 · 6:00–7:30 PM · CIF · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>room TBD</span></div>
+                </summary>
+                <p>Come to the GTO Illini Info Session to learn about how the club will be run this year, including the addition of new in-person weekly and monthly tournaments. We&apos;ll have pizza, drinks, and also give you a chance to play a couple hands with our new chips!</p>
+              </details>
+            </StaggerItem>
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ===== WEEKLY RECURRING ===== */}
+      <section className="section navy">
+        <div className="wrap">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>02 — Recurring</StaggerItem>
             <StaggerItem as="h2" y={16}>Every <span className="accent">Week</span></StaggerItem>
           </Stagger>
 
           <Stagger className="weekly-grid" stagger={0.06} style={{ marginTop: 40 }}>
-            <StaggerItem className="weekly" style={{ '--c': 'var(--joker)' } as React.CSSProperties}>
-              <div className="id">1.1.2 · Tournament · Weekly</div>
-              <h4>Tuesday Tournaments</h4>
-              <div className="when">Tue · Live in-person play · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
-            </StaggerItem>
             <StaggerItem className="weekly" style={{ '--c': 'var(--king)' } as React.CSSProperties}>
               <div className="id">1.1.1 · Theory · Weekly</div>
-              <h4>Thursday Lectures</h4>
-              <div className="when">Thu · Solver labs &amp; GTO theory · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>time / room TBD</span></div>
+              <h4>Tuesday Lectures</h4>
+              <div className="when">Tue · 6:30–8:30 PM · Classroom 1000, Siebel Center for Design</div>
+            </StaggerItem>
+            <StaggerItem className="weekly" style={{ '--c': 'var(--joker)' } as React.CSSProperties}>
+              <div className="id">1.1.2 · Tournament · Weekly</div>
+              <h4>Thursday Tournaments</h4>
+              <div className="when">Thu · 6:00–9:00 PM · Sunrise Studio 1046, Siebel Center for Design</div>
             </StaggerItem>
           </Stagger>
         </div>
       </section>
 
       {/* ===== MARQUEE EVENTS ===== */}
-      <section className="section navy">
+      <section className="section">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
-            <StaggerItem className="num" y={12}>02 — Marquee</StaggerItem>
+            <StaggerItem className="num" y={12}>03 — Marquee</StaggerItem>
             <StaggerItem as="h2" y={16}>Major <span className="accent">Tournaments</span></StaggerItem>
           </Stagger>
           <Reveal as="p" className="lede" y={12}>
