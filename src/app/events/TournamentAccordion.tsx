@@ -85,7 +85,7 @@ export default function TournamentAccordion() {
               borderRadius: 4,
               overflow: 'hidden',
               paddingInline: 'var(--gutter)',
-              background: isHovered && !isOpen ? 'rgba(255,255,255,0.04)' : 'transparent',
+              background: isHovered && !isOpen ? 'rgba(19,41,75,0.06)' : 'transparent',
               transition: 'background 0.15s',
             }}
           >
@@ -104,7 +104,7 @@ export default function TournamentAccordion() {
               }}
               style={{
                 cursor: 'pointer',
-                borderBottom: isOpen ? '1px solid var(--on-navy-rule)' : 'none',
+                borderBottom: isOpen ? '1px solid var(--rule)' : 'none',
               }}
             >
               <div className="tl-date"><b>{t.month}</b><span>{t.term}</span></div>
@@ -120,12 +120,12 @@ export default function TournamentAccordion() {
                   width: 34,
                   height: 34,
                   borderRadius: '50%',
-                  border: '1px solid var(--on-navy-rule)',
+                  border: '1px solid var(--rule)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
-                  background: isOpen ? 'rgba(255,255,255,0.08)' : 'transparent',
+                  background: isOpen ? 'rgba(19,41,75,0.08)' : 'transparent',
                   transition: 'background 0.15s',
                 }}>
                   <motion.svg
@@ -133,7 +133,7 @@ export default function TournamentAccordion() {
                     aria-hidden
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 26 }}
-                    style={{ color: 'var(--on-navy-2)' }}
+                    style={{ color: 'var(--muted)' }}
                   >
                     <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </motion.svg>
@@ -169,7 +169,7 @@ export default function TournamentAccordion() {
                   >
                     {/* Themed paper info card */}
                     <div style={{
-                      background: 'var(--paper)',
+                      background: '#fff',
                       border: '1px solid var(--rule)',
                       borderLeft: `3px solid ${t.accent}`,
                       borderRadius: 4,
@@ -195,7 +195,7 @@ export default function TournamentAccordion() {
                             fontSize: 11,
                             letterSpacing: '.1em',
                             textTransform: 'uppercase',
-                            color: 'var(--muted)',
+                            color: 'var(--felt)',
                             minWidth: 112,
                             flexShrink: 0,
                           }}>{label}</span>

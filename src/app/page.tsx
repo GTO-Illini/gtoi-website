@@ -210,48 +210,18 @@ export default function Home() {
             students at UIUC.
           </Reveal>
 
-          <Stagger stagger={0.07} style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>
-
-            {/* Tier 1 — Joker */}
-            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="tier" style={{ '--c': 'var(--joker)', width: '100%' } as React.CSSProperties}>
-                <div className="tier-id"><span>T-01 // Joker</span><span className="suit-mark">♦</span></div>
-                <div className="tier-name">Joker</div>
-                <div className="tier-kind">Title Partner</div>
-                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
-              </div>
+          <Stagger className="sponsor-grid" stagger={0.07} style={{ marginTop: 44 }}>
+            <StaggerItem y={18}>
+              <a
+                className="sponsor-logo"
+                href="https://www.janestreet.com/who-we-are/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Jane Street"
+              >
+                <img src="/image-assets/sponsors/jane-street.png" alt="Jane Street" />
+              </a>
             </StaggerItem>
-
-            {/* Tier 2 — Ace */}
-            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="tier" style={{ '--c': 'var(--ace)', width: '100%' } as React.CSSProperties}>
-                <div className="tier-id"><span>T-02 // Ace</span><span className="suit-mark">♠</span></div>
-                <div className="tier-name">Ace</div>
-                <div className="tier-kind">Premium Partner</div>
-                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
-              </div>
-            </StaggerItem>
-
-            {/* Tier 3 — King */}
-            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="tier" style={{ '--c': 'var(--king)', width: '100%' } as React.CSSProperties}>
-                <div className="tier-id"><span>T-03 // King</span><span className="suit-mark">♣</span></div>
-                <div className="tier-name">King</div>
-                <div className="tier-kind">Standard Partner</div>
-                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
-              </div>
-            </StaggerItem>
-
-            {/* Tier 4 — Queen */}
-            <StaggerItem y={18} style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="tier" style={{ '--c': 'var(--queen)', width: '100%' } as React.CSSProperties}>
-                <div className="tier-id"><span>T-04 // Queen</span><span className="suit-mark">♥</span></div>
-                <div className="tier-name">Queen</div>
-                <div className="tier-kind">Entry Partner</div>
-                <p style={{ fontSize: 14, color: 'var(--on-navy-2)', marginTop: 8 }}>Be our first sponsors!</p>
-              </div>
-            </StaggerItem>
-
           </Stagger>
 
           <Reveal y={16} style={{
