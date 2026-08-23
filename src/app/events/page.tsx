@@ -54,7 +54,7 @@ export default function Events() {
                 <summary>
                   <div className="id">1.0.1 · Quad Day</div>
                   <h4>Visit Us at Quad Day</h4>
-                  <div className="when">Sun, Aug 23 · 12:00–4:00 PM · Stall 126, Math &amp; Engineering section</div>
+                  <div className="when">Sun, Aug 23 · 12:00–4:00 PM · Section 26, near Noyes Laboratory</div>
                 </summary>
                 <p>Join us at Quad Day to learn about the club, say hi to the team, and take a quiz to potentially win some cool, poker-related prizes!</p>
               </details>
