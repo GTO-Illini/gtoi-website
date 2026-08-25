@@ -64,7 +64,7 @@ export default function Events() {
                 <summary>
                   <div className="id">1.0.2 · Info Session</div>
                   <h4>GTO Illini Info Session</h4>
-                  <div className="when">Tue, Aug 25 · 6:00–7:30 PM · CIF · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>room TBD</span></div>
+                  <div className="when">Tue, Aug 25 · 6:30–8:00 PM · CIF · <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>room TBD</span></div>
                 </summary>
                 <p>Come to the GTO Illini Info Session to learn about how the club will be run this year, including the addition of new in-person weekly and monthly tournaments. We&apos;ll have pizza, drinks, and also give you a chance to play a couple hands with our new chips! <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxuP5qguXnTnF1Zd53FQNUiHSUnsONqE3sq7imPZwzKn08rA/viewform" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--orange)', textDecoration: 'underline', textUnderlineOffset: 3 }}>RSVP here</a>.</p>
               </details>
