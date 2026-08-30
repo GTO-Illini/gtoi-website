@@ -145,7 +145,7 @@ export default function Leaderboard() {
           </Stagger>
 
           {/* Full table */}
-          <Reveal y={20} style={{
+          <div style={{
             marginTop: 32,
             background: 'var(--paper)',
             border: '1px solid var(--rule)',
@@ -195,7 +195,7 @@ export default function Leaderboard() {
                 </div>
               </div>
             ))}
-          </Reveal>
+          </div>
 
           {/* Past leaderboards CTA */}
           <Reveal y={16} style={{
