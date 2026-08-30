@@ -1,6 +1,27 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
+import { standings } from './standings';
+
+const UPDATED = '8/30/26';
+const EVENTS = Math.max(...standings.map(p => p.events));
+const MEDALS: Record<number, string> = { 1: 'var(--ace)', 2: '#9ca3af', 3: '#b07a50' };
+
+const mono: React.CSSProperties = {
+  fontFamily: 'var(--font-ibm-plex-mono, "IBM Plex Mono"), monospace',
+  letterSpacing: '.04em',
+};
+
+const row: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: '52px 1fr 110px 80px 100px',
+  alignItems: 'center',
+  gap: 12,
+  padding: '13px 20px',
+};
+
+const top3 = standings.slice(0, 3);
+const rest = standings.slice(3);
 
 export const metadata: Metadata = {
   title: 'Leaderboard & Standings',
@@ -56,66 +77,124 @@ export default function Leaderboard() {
               color: 'var(--on-navy-2)',
               marginTop: 20,
             }}>
-              Cumulative chip counts across all sanctioned GTO Illini sessions.
+              Cumulative season points across all sanctioned GTO Illini tournaments.
             </p>
           </FadeIn>
+
+          <Stagger className="hero-stats" stagger={0.05} delay={0.26}>
+            {[
+              { k: 'Season', v: '2026–27' },
+              { k: 'Players ranked', v: standings.length.toString() },
+              { k: 'Tournaments', v: EVENTS.toString() },
+              { k: 'Leader', v: standings[0].name.split(' ')[0] },
+            ].map(({ k, v }) => (
+              <StaggerItem key={k} y={12}>
+                <div style={{
+                  fontFamily: 'var(--font-ibm-plex-mono)',
+                  fontSize: 10,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--on-navy-2)',
+                  marginBottom: 6,
+                }}>{k}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, color: '#fff', letterSpacing: '-.01em' }}>{v}</div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </header>
 
-      {/* ===== COMING SOON ===== */}
+      {/* ===== STANDINGS ===== */}
       <section className="section">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
             <StaggerItem className="num" y={12}>01 — Rankings</StaggerItem>
             <StaggerItem as="h2" y={16}>Season <span className="accent">Standings</span></StaggerItem>
           </Stagger>
+          <Reveal as="p" className="lede" y={12} style={{ marginBottom: 0 }}>
+            Season points across {EVENTS} sanctioned tournament{EVENTS === 1 ? '' : 's'} — last updated {UPDATED}.
+          </Reveal>
 
-          <Reveal y={20} style={{
+          {/* Podium — top 3 */}
+          <Stagger stagger={0.06} style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 16,
             marginTop: 44,
+          }}>
+            {top3.map(p => (
+              <StaggerItem key={p.netid} className="card" style={{ '--c': MEDALS[p.rank] } as React.CSSProperties}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <span className="tag">
+                    <span className="dot" />
+                    {p.rank === 1 ? '1st Place' : p.rank === 2 ? '2nd Place' : '3rd Place'}
+                  </span>
+                </div>
+                <div style={{
+                  fontSize: 'clamp(22px, 3vw, 28px)',
+                  fontWeight: 500,
+                  color: 'var(--ink)',
+                  letterSpacing: '-.01em',
+                  marginTop: 6,
+                }}>{p.name}</div>
+                <div style={{ ...mono, fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>
+                  {p.points.toLocaleString('en-US')} pts · {p.netid}
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          {/* Full table */}
+          <Reveal y={20} style={{
+            marginTop: 32,
             background: 'var(--paper)',
             border: '1px solid var(--rule)',
-            borderTop: '3px solid var(--felt)',
             borderRadius: 4,
-            padding: 'clamp(48px, 8vw, 96px) 40px',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 16,
+            overflow: 'hidden',
           }}>
-            <div aria-hidden style={{
-              fontSize: 72,
-              lineHeight: 1,
-              color: 'var(--rule)',
-              userSelect: 'none',
-            }}>♠</div>
             <div style={{
-              fontFamily: 'var(--font-ibm-plex-mono, "IBM Plex Mono"), monospace',
-              fontSize: 11,
-              letterSpacing: '.16em',
-              textTransform: 'uppercase',
-              color: 'var(--muted)',
+              ...row,
+              background: 'var(--bg-2)',
+              borderBottom: '2px solid var(--rule)',
+              padding: '10px 20px',
             }}>
-              <span style={{ color: 'var(--orange)' }}>{'//'}</span> Coming Soon
+              {(['#', 'Name', 'NetID', 'Events', 'Points'] as const).map((col, i) => (
+                <div key={col} style={{
+                  ...mono,
+                  fontSize: 10,
+                  letterSpacing: '.14em',
+                  textTransform: 'uppercase',
+                  color: 'var(--muted)',
+                  textAlign: i === 0 || i >= 3 ? 'right' : 'left',
+                }}>
+                  {col === '#' ? <><span style={{ color: 'var(--orange)', opacity: .9 }}>{'//'}</span> {col}</> : col}
+                </div>
+              ))}
             </div>
-            <h2 style={{
-              fontSize: 'clamp(24px, 4vw, 38px)',
-              color: 'var(--ink)',
-              fontWeight: 500,
-              letterSpacing: '-.015em',
-              maxWidth: 480,
-            }}>
-              Coming in the 2026–27 GTO Illini Season
-            </h2>
-            <p style={{
-              fontSize: 15,
-              color: 'var(--muted)',
-              maxWidth: 400,
-              lineHeight: 1.6,
-            }}>
-              Rankings will be posted here once the season kicks off.
-              Check back soon.
-            </p>
+
+            {rest.map((p, idx) => (
+              <div key={p.netid} style={{
+                ...row,
+                background: idx % 2 === 0 ? 'var(--paper)' : 'var(--bg)',
+                borderBottom: idx === rest.length - 1 ? 'none' : '1px solid var(--rule)',
+              }}>
+                <div style={{ ...mono, fontSize: 13, textAlign: 'right', color: 'var(--muted)', fontWeight: 700 }}>
+                  {p.rank}
+                </div>
+                <div style={{ fontSize: 14.5, color: 'var(--ink)' }}>{p.name}</div>
+                <div style={{ ...mono, fontSize: 12, color: 'var(--muted)' }}>{p.netid}</div>
+                <div style={{ ...mono, fontSize: 13, textAlign: 'right', color: 'var(--muted)' }}>{p.events}</div>
+                <div style={{
+                  ...mono,
+                  fontSize: 13,
+                  textAlign: 'right',
+                  color: p.points > 0 ? 'var(--ink-2)' : 'var(--muted)',
+                  fontWeight: p.points > 0 ? 600 : 400,
+                }}>
+                  {p.points > 0 ? p.points.toLocaleString('en-US') : '—'}
+                </div>
+              </div>
+            ))}
           </Reveal>
 
           {/* Past leaderboards CTA */}
