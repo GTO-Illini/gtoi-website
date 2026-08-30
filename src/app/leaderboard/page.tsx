@@ -77,7 +77,7 @@ export default function Leaderboard() {
               color: 'var(--on-navy-2)',
               marginTop: 20,
             }}>
-              Cumulative season points across all sanctioned GTO Illini tournaments.
+              Cumulative GTokens (GTo) earned across all sanctioned GTO Illini tournaments.
             </p>
           </FadeIn>
 
@@ -112,7 +112,7 @@ export default function Leaderboard() {
             <StaggerItem as="h2" y={16}>Season <span className="accent">Standings</span></StaggerItem>
           </Stagger>
           <Reveal as="p" className="lede" y={12} style={{ marginBottom: 0 }}>
-            Season points across {EVENTS} sanctioned tournament{EVENTS === 1 ? '' : 's'} — last updated {UPDATED}.
+            GTokens across {EVENTS} sanctioned tournament{EVENTS === 1 ? '' : 's'} — last updated {UPDATED}.
           </Reveal>
 
           {/* Podium — top 3 */}
@@ -138,7 +138,7 @@ export default function Leaderboard() {
                   marginTop: 6,
                 }}>{p.name}</div>
                 <div style={{ ...mono, fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>
-                  {p.points.toLocaleString('en-US')} pts · {p.netid}
+                  {p.points.toLocaleString('en-US')} GTo · {p.netid}
                 </div>
               </StaggerItem>
             ))}
@@ -158,7 +158,7 @@ export default function Leaderboard() {
               borderBottom: '2px solid var(--rule)',
               padding: '10px 20px',
             }}>
-              {(['#', 'Name', 'NetID', 'Events', 'Points'] as const).map((col, i) => (
+              {(['#', 'Name', 'NetID', 'Events', 'GTokens'] as const).map((col, i) => (
                 <div key={col} style={{
                   ...mono,
                   fontSize: 10,
