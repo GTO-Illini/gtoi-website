@@ -12,13 +12,13 @@ const mono: React.CSSProperties = {
   letterSpacing: '.04em',
 };
 
-const row: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: '52px 1fr 110px 80px 100px',
-  alignItems: 'center',
-  gap: 12,
-  padding: '13px 20px',
-};
+const COLS = [
+  { label: '#', cls: '' },
+  { label: 'Name', cls: '' },
+  { label: 'NetID', cls: 'lb-netid' },
+  { label: 'Events', cls: 'lb-events' },
+  { label: 'GTokens', cls: '' },
+] as const;
 
 const top3 = standings.slice(0, 3);
 const rest = standings.slice(3);
@@ -105,12 +105,7 @@ export default function Leaderboard() {
           </Reveal>
 
           {/* Podium — top 3 */}
-          <Stagger stagger={0.06} style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 16,
-            marginTop: 44,
-          }}>
+          <Stagger className="card-grid c3" stagger={0.06} style={{ marginTop: 44 }}>
             {top3.map(p => (
               <StaggerItem key={p.netid} className="card" style={{ '--c': MEDALS[p.rank] } as React.CSSProperties}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -141,14 +136,12 @@ export default function Leaderboard() {
             borderRadius: 4,
             overflow: 'hidden',
           }}>
-            <div style={{
-              ...row,
+            <div className="lb-row" style={{
               background: 'var(--bg-2)',
               borderBottom: '2px solid var(--rule)',
-              padding: '10px 20px',
             }}>
-              {(['#', 'Name', 'NetID', 'Events', 'GTokens'] as const).map((col, i) => (
-                <div key={col} style={{
+              {COLS.map((col, i) => (
+                <div key={col.label} className={col.cls} style={{
                   ...mono,
                   fontSize: 10,
                   letterSpacing: '.14em',
@@ -156,14 +149,13 @@ export default function Leaderboard() {
                   color: 'var(--muted)',
                   textAlign: i === 0 || i >= 3 ? 'right' : 'left',
                 }}>
-                  {col === '#' ? <><span style={{ color: 'var(--orange)', opacity: .9 }}>{'//'}</span> {col}</> : col}
+                  {col.label === '#' ? <><span style={{ color: 'var(--orange)', opacity: .9 }}>{'//'}</span> #</> : col.label}
                 </div>
               ))}
             </div>
 
             {rest.map((p, idx) => (
-              <div key={p.netid} style={{
-                ...row,
+              <div key={p.netid} className="lb-row" style={{
                 background: idx % 2 === 0 ? 'var(--paper)' : 'var(--bg)',
                 borderBottom: idx === rest.length - 1 ? 'none' : '1px solid var(--rule)',
               }}>
@@ -171,8 +163,8 @@ export default function Leaderboard() {
                   {p.rank}
                 </div>
                 <div style={{ fontSize: 14.5, color: 'var(--ink)' }}>{p.name}</div>
-                <div style={{ ...mono, fontSize: 12, color: 'var(--muted)' }}>{p.netid}</div>
-                <div style={{ ...mono, fontSize: 13, textAlign: 'right', color: 'var(--muted)' }}>{p.events}</div>
+                <div className="lb-netid" style={{ ...mono, fontSize: 12, color: 'var(--muted)' }}>{p.netid}</div>
+                <div className="lb-events" style={{ ...mono, fontSize: 13, textAlign: 'right', color: 'var(--muted)' }}>{p.events}</div>
                 <div style={{
                   ...mono,
                   fontSize: 13,
