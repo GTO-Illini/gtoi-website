@@ -69,17 +69,6 @@ export default function Leaderboard() {
               Club <span className="accent">Leaderboard</span>
             </h1>
           </FadeIn>
-          <FadeIn delay={0.19} y={16}>
-            <p style={{
-              fontSize: 'clamp(15px, 2vw, 18px)',
-              lineHeight: 1.55,
-              maxWidth: 560,
-              color: 'var(--on-navy-2)',
-              marginTop: 20,
-            }}>
-              Cumulative GTokens (GTo) earned across all sanctioned GTO Illini tournaments.
-            </p>
-          </FadeIn>
 
           <Stagger className="hero-stats" stagger={0.05} delay={0.26}>
             {[
@@ -112,7 +101,7 @@ export default function Leaderboard() {
             <StaggerItem as="h2" y={16}>Season <span className="accent">Standings</span></StaggerItem>
           </Stagger>
           <Reveal as="p" className="lede" y={12} style={{ marginBottom: 0 }}>
-            GTokens across {EVENTS} sanctioned tournament{EVENTS === 1 ? '' : 's'} — last updated {UPDATED}.
+            Last updated {UPDATED}.
           </Reveal>
 
           {/* Podium — top 3 */}
