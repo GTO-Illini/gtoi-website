@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
-import { standings } from './standings';
+import { standings, type Standing } from './standings';
 
-const UPDATED = '8/30/26';
+const PREV = '8/30/26';
 const EVENTS = Math.max(...standings.map(p => p.events));
 const MEDALS: Record<number, string> = { 1: 'var(--ace)', 2: '#9ca3af', 3: '#b07a50' };
 
@@ -17,8 +17,17 @@ const COLS = [
   { label: 'Name', cls: '' },
   { label: 'NetID', cls: 'lb-netid' },
   { label: 'Events', cls: 'lb-events' },
+  { label: 'Move', cls: 'lb-delta' },
   { label: 'GTokens', cls: '' },
 ] as const;
+
+function delta(p: Standing) {
+  if (p.delta === null) return { text: "NEW", color: "var(--orange)" };
+  if (p.points === 0) return { text: "—", color: "var(--muted)" };
+  if (p.delta > 0) return { text: `▲ ${p.delta}`, color: "#2f8f57" };
+  if (p.delta < 0) return { text: `▼ ${-p.delta}`, color: "#b4483c" };
+  return { text: "–", color: "var(--muted)" };
+}
 
 const top3 = standings.slice(0, 3);
 const rest = standings.slice(3);
@@ -100,9 +109,6 @@ export default function Leaderboard() {
             <StaggerItem className="num" y={12}>01 — Rankings</StaggerItem>
             <StaggerItem as="h2" y={16}>Season <span className="accent">Standings</span></StaggerItem>
           </Stagger>
-          <Reveal as="p" className="lede" y={12} style={{ marginBottom: 0 }}>
-            Last updated {UPDATED}.
-          </Reveal>
 
           {/* Podium — top 3 */}
           <Stagger className="card-grid c3" stagger={0.06} style={{ marginTop: 44 }}>
@@ -123,6 +129,9 @@ export default function Leaderboard() {
                 }}>{p.name}</div>
                 <div style={{ ...mono, fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>
                   {p.points.toLocaleString('en-US')} GTo · {p.netid}
+                </div>
+                <div style={{ ...mono, fontSize: 12, marginTop: 8, color: delta(p).color }}>
+                  {delta(p).text}{p.gained > 0 ? ` · +${p.gained.toLocaleString('en-US')} since ${PREV}` : ``}
                 </div>
               </StaggerItem>
             ))}
@@ -165,6 +174,9 @@ export default function Leaderboard() {
                 <div style={{ fontSize: 14.5, color: 'var(--ink)' }}>{p.name}</div>
                 <div className="lb-netid" style={{ ...mono, fontSize: 12, color: 'var(--muted)' }}>{p.netid}</div>
                 <div className="lb-events" style={{ ...mono, fontSize: 13, textAlign: 'right', color: 'var(--muted)' }}>{p.events}</div>
+                <div className="lb-delta" style={{ ...mono, fontSize: 12, textAlign: 'right', color: delta(p).color }}>
+                  {delta(p).text}
+                </div>
                 <div style={{
                   ...mono,
                   fontSize: 13,
