@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
 import { standings, type Standing } from './standings';
 
-const PREV = '8/30/26';
 const EVENTS = Math.max(...standings.map(p => p.events));
 const MEDALS: Record<number, string> = { 1: 'var(--ace)', 2: '#9ca3af', 3: '#b07a50' };
 
@@ -129,9 +128,6 @@ export default function Leaderboard() {
                 }}>{p.name}</div>
                 <div style={{ ...mono, fontSize: 13, color: 'var(--muted)', marginTop: 2 }}>
                   {p.points.toLocaleString('en-US')} GTo · {p.netid}
-                </div>
-                <div style={{ ...mono, fontSize: 12, marginTop: 8, color: delta(p).color }}>
-                  {delta(p).text}{p.gained > 0 ? ` · +${p.gained.toLocaleString('en-US')} since ${PREV}` : ``}
                 </div>
               </StaggerItem>
             ))}
