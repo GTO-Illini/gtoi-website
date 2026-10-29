@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import TournamentAccordion from './TournamentAccordion';
 import { FadeIn, Reveal, Stagger, StaggerItem } from '../components/motion';
 
@@ -9,6 +10,17 @@ export const metadata: Metadata = {
     'Weekly poker tournaments and events hosted by GTO Illini, the UIUC poker club at the University of Illinois Urbana-Champaign. See the schedule and join us.',
   alternates: { canonical: '/events' },
 };
+
+const FALL_CLASSIC_OVERVIEW = [
+  ['Game', "No-Limit Texas Hold'em · Big Blind Ante"],
+  ['Stack', '20,000 starting chips (100 BB) · 20-minute levels'],
+  ['Entry', 'Free, open to all UIUC students'],
+  ['Capacity', 'Up to 200 registered players'],
+  ['Late Reg', 'Closes at 3:10 PM (end of the first break)'],
+  ['Re-entry', 'Only with a Rebuy Ticket (given to members who volunteered at past events). One re-entry per player, before late registration closes.'],
+];
+
+const FALL_CLASSIC_PRIZES = [180, 105, 65, 45, 35, 25, 20, 15, 10];
 
 export default function Events() {
   return (
@@ -40,11 +52,100 @@ export default function Events() {
         </div>
       </header>
 
-      {/* ===== ORIENTATION ===== */}
-      <section className="section">
+      {/* ===== FALL POKER CLASSIC ===== */}
+      <section className="section" id="fall-classic">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
-            <StaggerItem className="num" y={12}>01 — Orientation</StaggerItem>
+            <StaggerItem className="num" y={12}>01 — Featured</StaggerItem>
+            <StaggerItem as="h2" y={16}>Fall Poker <span className="accent">Classic</span></StaggerItem>
+          </Stagger>
+          <Reveal as="p" className="lede" y={12}>
+            Our flagship fall tournament: a free No-Limit Hold&apos;em freeroll open to all UIUC
+            students, with a $500 prize pool for the top 9 finishers. No membership required.
+          </Reveal>
+          <Reveal y={12} style={{ marginTop: 32 }}>
+            <a
+              className="btn orange"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfovNStRq0m79PQqCGe0cdLbnZ2H10cyKdWDdCT1E7aJ-7FEg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: 16, padding: '18px 34px' }}
+            >
+              RSVP ASAP, limited seats available
+            </a>
+          </Reveal>
+
+          <Stagger className="stat-grid" stagger={0.04} style={{ marginTop: 48 }}>
+            <StaggerItem className="stat">
+              <div className="k">Date</div>
+              <div className="n">Nov 7</div>
+              <div className="d">Saturday · Check-in 12:45 PM · Cards in the air 1:00 PM</div>
+            </StaggerItem>
+            <StaggerItem className="stat">
+              <div className="k">Location</div>
+              <div className="n">CIF</div>
+              <div className="d">Check in at Room 0035 · 1405 W Springfield Ave, Urbana</div>
+            </StaggerItem>
+            <StaggerItem className="stat">
+              <div className="k">Prize Pool</div>
+              <div className="n">$500</div>
+              <div className="d">Gift cards for the top 9 finishers</div>
+            </StaggerItem>
+          </Stagger>
+
+          <Stagger className="card-grid c2" stagger={0.06} style={{ marginTop: 44 }}>
+            <StaggerItem className="card" style={{ '--c': 'var(--felt)' } as React.CSSProperties}>
+              <span className="tag"><span className="dot" />Overview</span>
+              <h4>The Format</h4>
+              <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '10px 18px', fontSize: 14.5, color: 'var(--ink-2)' }}>
+                {FALL_CLASSIC_OVERVIEW.map(([label, value]) => (
+                  <Fragment key={label}>
+                    <dt style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--felt)', paddingTop: 3 }}>{label}</dt>
+                    <dd>{value}</dd>
+                  </Fragment>
+                ))}
+              </dl>
+              <p>
+                The event runs about 7.5 hours (1:00 PM to about 8:30 PM, including a 30-minute
+                dinner break). With 20+ starting tables, tables will be rebalanced often, so listen
+                for floor announcements.
+              </p>
+            </StaggerItem>
+
+            <StaggerItem className="card" style={{ '--c': 'var(--orange)' } as React.CSSProperties}>
+              <span className="tag"><span className="dot" />Payouts</span>
+              <h4>Prizes</h4>
+              <p>
+                The top 9 finishers win gift cards (Amazon, Target, Nintendo, etc.), whether or not
+                they&apos;re members. Winners pick the retailer after the event.
+              </p>
+              <ol style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, listStyle: 'none', padding: 0 }}>
+                {FALL_CLASSIC_PRIZES.map((prize, i) => (
+                  <li key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', border: '1px solid var(--rule)', borderRadius: 3, fontSize: 14 }}>
+                    <span style={{ fontFamily: 'var(--font-ibm-plex-mono)', color: 'var(--muted)' }}>#{i + 1}</span>
+                    <b style={{ color: i === 0 ? 'var(--orange)' : 'var(--ink)', fontWeight: 600 }}>${prize}</b>
+                  </li>
+                ))}
+              </ol>
+              <p>Hand-for-hand play starts at the prize bubble (10 players left).</p>
+
+              <h4 style={{ marginTop: 10 }}>GTokens <span style={{ fontSize: 14, color: 'var(--muted)' }}>· members only</span></h4>
+              <ul style={{ listStyle: 'disc', paddingLeft: 18,fontSize: 14.5, color: 'var(--ink-2)', display: 'grid', gap: 6 }}>
+                <li>Every member entry (including re-entries) adds 50 GTo to the pool, which counts toward the semester leaderboard.</li>
+                <li>Members are ranked by finish with non-members removed. The top 15% of member entries (rounded up) cash, using the standard GTO Illini payout structure.</li>
+                <li>No hand-for-hand at the GTo bubble.</li>
+                <li>Membership ($10/semester) must be active by 3:10 PM, when late registration closes. The GTo payout schedule is posted then.</li>
+              </ul>
+            </StaggerItem>
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ===== ORIENTATION ===== */}
+      <section className="section navy">
+        <div className="wrap">
+          <Stagger className="section-head" stagger={0.05}>
+            <StaggerItem className="num" y={12}>02 — Orientation</StaggerItem>
             <StaggerItem as="h2" y={16}>Start <span className="accent">Here</span></StaggerItem>
           </Stagger>
 
@@ -74,10 +175,10 @@ export default function Events() {
       </section>
 
       {/* ===== WEEKLY RECURRING ===== */}
-      <section className="section navy">
+      <section className="section">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
-            <StaggerItem className="num" y={12}>02 — Recurring</StaggerItem>
+            <StaggerItem className="num" y={12}>03 — Recurring</StaggerItem>
             <StaggerItem as="h2" y={16}>Every <span className="accent">Week</span></StaggerItem>
           </Stagger>
 
@@ -97,10 +198,10 @@ export default function Events() {
       </section>
 
       {/* ===== MARQUEE EVENTS ===== */}
-      <section className="section">
+      <section className="section navy">
         <div className="wrap">
           <Stagger className="section-head" stagger={0.05}>
-            <StaggerItem className="num" y={12}>03 — Marquee</StaggerItem>
+            <StaggerItem className="num" y={12}>04 — Marquee</StaggerItem>
             <StaggerItem as="h2" y={16}>Major <span className="accent">Tournaments</span></StaggerItem>
           </Stagger>
           <Reveal as="p" className="lede" y={12}>

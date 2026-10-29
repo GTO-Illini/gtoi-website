@@ -12,6 +12,7 @@ interface Tournament {
   description: string;
   tag: string;
   accent: string;
+  details?: { label: string; value: string }[];
 }
 
 const TOURNAMENTS: Tournament[] = [
@@ -32,6 +33,11 @@ const TOURNAMENTS: Tournament[] = [
     description: 'Flagship fall championship.',
     tag: 'Title event',
     accent: 'var(--joker)',
+    details: [
+      { label: 'Date & Time', value: 'Sat, Nov 7 · Check-in 12:45 PM · Starts 1:00 PM' },
+      { label: 'Room', value: 'Room 0035, CIF' },
+      { label: 'Prizes', value: '$500 in gift cards for the top 9 · Free entry' },
+    ],
   },
   {
     id: 'tag-team',
@@ -188,7 +194,7 @@ export default function TournamentAccordion() {
                       }}>
                         {'// Event Details'}
                       </div>
-                      {DETAILS.map(({ label, value }) => (
+                      {(t.details ?? DETAILS).map(({ label, value }) => (
                         <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
                           <span style={{
                             fontFamily: 'var(--font-ibm-plex-mono)',
