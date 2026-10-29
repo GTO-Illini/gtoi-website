@@ -92,6 +92,28 @@ export default function Home() {
         </div>
       </header>
 
+      {/* ===== FALL CLASSIC BANNER ===== */}
+      <a href="/events#fall-classic" style={{
+        display: 'block', background: 'var(--orange)', color: '#fff', textDecoration: 'none',
+      }}>
+        <div className="wrap" style={{
+          display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between',
+          gap: '8px 24px', paddingBlock: 18,
+        }}>
+          <div>
+            <div style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', opacity: .85 }}>
+              {'// Sat, Nov 7 · 1:00 PM · CIF Room 0035'}
+            </div>
+            <div style={{ fontSize: 'clamp(18px, 2.4vw, 24px)', fontWeight: 500, marginTop: 4 }}>
+              Fall Poker Classic: free entry, $500 prize pool
+            </div>
+          </div>
+          <span style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: 12, letterSpacing: '.1em', textTransform: 'uppercase', fontWeight: 500 }}>
+            Event details →
+          </span>
+        </div>
+      </a>
+
       {/* ===== ABOUT ===== */}
       <section className="section">
         <div className="wrap">
